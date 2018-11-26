@@ -1,0 +1,39 @@
+.fix-rd td{
+    text-align: center;
+}
+
+#trash{
+    color:red;
+    font-size: 17px;
+}
+#trash:hover{
+    font-size: 18px;
+}
+
+
+/*paging*/
+nav.numbering {
+    float: right;    
+}
+.fixPagination {
+    display: inline-block;
+    color:red;
+}
+
+.fixPagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+    /* margin: 0 4px; */
+}
+
+.fixPagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}
+
+.fixPagination a:hover:not(.active) {background-color: #ddd;}

@@ -1,0 +1,41 @@
+/* Paging */
+
+
+/* Dropdown menu */
+.dropdown-menu {
+    min-width: 100px;
+}
+
+.dropdown-menu > li > a {
+    padding: 0px 5px;
+}
+
+.dropdown-menu > li:hover {
+    background: silver;
+}
+
+.dropdown-menu > li:hover > a {
+    color: red;
+}
+
+/* Table */
+table th {
+    text-align: center;
+}
+
+table td.padding-fix {
+    padding: 0px !important;
+}
+
+.order-details {
+    max-width: 700px;
+    margin: auto !important;
+}
+
+.text-bold {
+    font-weight: bold !important;
+}
+
+.error {
+    color: red;
+}
