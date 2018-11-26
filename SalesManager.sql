@@ -3,47 +3,50 @@
 
 create table product
 (
-	idProduct nchar(10) not null primary key,
+	idProduct int not null primary key auto_increment,
 	nameProduct nvarchar(45),
     description nvarchar(500),
-    view int,
+    view int, -- lượng view client click vào
     price double,
     dateCreated datetime,
-    proceducer nvarchar(45),
     imageName varchar(20),
-    status int, -- 1 : stocking / 0 : out of stocking
     quantitySold int,
-    idCategory nchar(10)    
+    quantity int,
+    idCategory int,
+    idProducer int
 );
-
+create table producer
+(
+	idProducer int not null primary key,
+    nameProducer nvarchar(45)
+);
 create table category
 (
-	idCategory nchar(10) not null primary key,
-    nameCategory nvarchar(45),
-    parentOfCategory nchar(10)
+	idCategory int not null primary key,
+    nameCategory nvarchar(45)
 );
 
 create table slideImages
 (
-	idSlideImages nchar(10),
+	idSlideImages int auto_increment,
     nameSlideImages nchar(45),
-    idCategory nchar(10)
+    idCategory int
 );
 
 create table orders
 (
-	idOrder nchar(10),
+	idOrder int auto_increment,
     message nvarchar(200),
     deliveryDate datetime,
     dateCreated datetime,
     status int, -- 1 : delivered / 0 : not delivery
     amount double,
-    idUser nchar(10)
+    idUser int
 );
 
 create table user
 (
-	idUser nchar(10),
+	idUser int,
     nameUser nvarchar(45),
     username nvarchar(45),
     password nvarchar(45),
@@ -56,10 +59,17 @@ create table user
 
 create table detailOrder
 (
-	idOrder nchar(10),
-    idProduct nchar(10),
+	idOrder int,
+    idProduct int,
     dateCreated datetime
-)
+);
+
+
+-- =========================== Insert DATA ==========================
+
+-- insert data product
+
+
 
 
 
