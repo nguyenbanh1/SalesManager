@@ -68,6 +68,15 @@ create table detailOrder
 -- =========================== Insert DATA ==========================
 
 -- insert data product
+select * from producer;
+update producer set nameProducer = 'DELL' where idProducer = 1;
+insert into producer(nameProducer) values('Apple');
+
+
+-- insert data category
+insert into category(nameCategory) values('Apple');
+
+-- insert producer
 
 
 

@@ -22,43 +22,43 @@
 </head>
 
 <body class="fix-header">
-    <form>
+    
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
         <!-- ============================================================== -->
-        <!-- Wrapper -->
+        <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-        <div id="wrapper">
-            <!-- ============================================================== -->
-            <!-- Topbar header - style you can find in pages.scss -->
-            <!-- ============================================================== -->
-            <?php require '../WebUC/AdminTopNav.php' ?>
-            <!-- End Top Navigation -->
-            <!-- ============================================================== -->
+        <?php require '../WebUC/AdminTopNav.php' ?>
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
 
-            <!-- Left Sidebar - style you can find in sidebar.scss  -->
-            <!-- ============================================================== -->
-            <?php require '../WebUC/AdminSidebar.php' ?>
-            <!-- ============================================================== -->
-            <!-- End Left Sidebar -->
-            <!-- ============================================================== -->
-            
-            <!-- ============================================================== -->
-            <!-- Page Content -->
-            <!-- ============================================================== -->
-            <div id="page-wrapper">
-            <?php require 'ProducerForm.php' ?>
-                <!-- /.container-fluid -->
-                <?php require '../WebUC/AdminFooter.php' ?>
-            </div>
-            <!-- ============================================================== -->
-            <!-- End Page Content -->
-            <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <?php require '../WebUC/AdminSidebar.php' ?>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+        
+        <!-- ============================================================== -->
+        <!-- Page Content -->
+        <!-- ============================================================== -->
+        <div id="page-wrapper">
+        <?php require 'ProducerForm.php' ?>
+            <!-- /.container-fluid -->
+            <?php require '../WebUC/AdminFooter.php' ?>
         </div>
+        <!-- ============================================================== -->
+        <!-- End Page Content -->
+        <!-- ============================================================== -->
+    </div>
 
 
-        <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
-        <!-- Bootstrap Core JavaScript -->
-        <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-    </form>
+    <script src="../plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+    
 </body>
 
 </html>
