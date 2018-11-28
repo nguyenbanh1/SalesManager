@@ -1,6 +1,5 @@
 -- create database sales_manager
 -- use sales_manager
-
 create table product
 (
 	idProduct int not null primary key auto_increment,
@@ -17,25 +16,25 @@ create table product
 );
 create table producer
 (
-	idProducer int not null primary key,
+	idProducer int not null primary key auto_increment,
     nameProducer nvarchar(45)
 );
 create table category
 (
-	idCategory int not null primary key,
+	idCategory int not null primary key auto_increment,
     nameCategory nvarchar(45)
 );
 
 create table slideImages
 (
-	idSlideImages int auto_increment,
-    nameSlideImages nchar(45),
+	idSlideImages int not null primary key auto_increment,
+    nameSlideImages nvarchar(45),
     idCategory int
 );
 
 create table orders
 (
-	idOrder int auto_increment,
+	idOrder int primary key not null auto_increment,
     message nvarchar(200),
     deliveryDate datetime,
     dateCreated datetime,
@@ -46,7 +45,7 @@ create table orders
 
 create table user
 (
-	idUser int,
+	idUser int not null primary key auto_increment,
     nameUser nvarchar(45),
     username nvarchar(45),
     password nvarchar(45),
@@ -61,7 +60,8 @@ create table detailOrder
 (
 	idOrder int,
     idProduct int,
-    dateCreated datetime
+    dateCreated datetime,
+    primary key(idOrder, idProduct)
 );
 
 
