@@ -78,8 +78,20 @@
                                     echo '<a href="NewProducer.php?offset='.($i*4).'">'.($i + 1).'</a>';
                                 }
                             ?>
-                            <a href="NewProducer.php?offset=<?php if($offsetCurrent >= ($count-3)) { echo ($count - 3);} else { echo ($offsetCurrent - 4); } ?>">></a>
-                            <a href="NewProducer.php?offset=<?= (int)($count-3)?>">&raquo;</a>
+                            <a href="NewProducer.php?offset=<?php 
+                                                                if ($count <= 4) {
+                                                                    echo 0;
+                                                                } else {
+                                                                    if ($offsetCurrent >= ($count - ($count % 4))) {
+                                                                        echo ($count - ($count % 4));
+                                                                    } else {
+                                                                        echo $offsetCurrent + 4;
+                                                                    }
+                                                                }
+                                                            
+                                                            ?>">></a>
+
+                            <a href="NewProducer.php?offset=<?php if ($count > 3 ) { echo ($count - ($count % 4));} else { echo 0;}?>">&raquo;</a>
                         </div>
                     </nav>
                 </div>

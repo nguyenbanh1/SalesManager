@@ -33,8 +33,13 @@
                             </thead>
                             <tbody>
                                 <?php
+                                    $offsetCurrent = 0;
+                                    if (isset($_GET["offset"])) {
+                                        $offsetCurrent = $_GET["offset"];
+                                    }
+
                                     include_once ("../DBMySQL/DataProvider.php");
-                                    $sql = "select * from Category";
+                                    $sql = "select * from Category limit 4 offset ".$offsetCurrent;
                                     $rs = DataProvider::excuteQuery($sql);
                                     
                                     $count = 0; 
@@ -55,17 +60,36 @@
                                 ?>                             
                             </tbody>
                         </table>
-
+                        <?php
+                            $sql = "select count(*) as 'count' from category";
+                            $rs = DataProvider::excuteQuery($sql);
+                            $row = mysqli_fetch_array($rs);
+                            $count = $row["count"];
+                            DataProvider::close();
+                        ?>
                         <nav class="numbering">
                             <div class="fixPagination">
-                                <a href="#">&laquo;</a>
-                                <a href="#">1</a>
-                                <a href="#" class = <?="active"?> >2</a>
-                                <a href="#">3</a>
-                                <a href="#">4</a>
-                                <a href="#">5</a>
-                                <a href="#">6</a>
-                                <a href="#">&raquo;</a>
+                                <a href="NewCategory.php?offset=0">&laquo;</a>
+                                <a href="NewCategory.php?offset=<?php if($offsetCurrent <= 0) { echo 0;} else { echo ($offsetCurrent - 4); } ?>"><</a>
+                                <?php
+                                    for ($i = 0 ;$i < $count/4 ; $i++) {
+                                        echo '<a href="NewCategory.php?offset='.($i*4).'">'.($i + 1).'</a>';
+                                    }
+                                ?>
+                                <a href="NewCategory.php?offset=<?php 
+                                                                if ($count <= 4) {
+                                                                    echo 0;
+                                                                } else {
+                                                                    if ($offsetCurrent >= ($count - ($count % 4))) {
+                                                                        echo ($count - ($count % 4));
+                                                                    } else {
+                                                                        echo $offsetCurrent + 4;
+                                                                    }
+                                                                }
+                                                            
+                                                            ?>">></a>
+
+                            <a href="NewCategory.php?offset=<?php if ($count > 3 ) { echo ($count - ($count % 4));} else { echo 0;}?>">&raquo;</a>
                             </div>
                         </nav>
                     </div>

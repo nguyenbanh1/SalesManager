@@ -66,37 +66,7 @@ create table detailOrder
 
 
 -- =========================== Insert DATA ==========================
-
 -- insert data product
-select * from producer;
-update producer set nameProducer = 'DELL' where idProducer = 1;
-insert into producer(nameProducer) values('Apple');
-
-
--- insert data category
-insert into category(nameCategory) values('Apple');
-
--- insert producer
-select idProduct,nameProduct,price,quantity from product;
-insert into Product(nameProduct,price,quantity) values('Iphone',10000000,100);
-
-select nameCategory from Category;
-
-insert into product(nameProduct, description, price, dateCreated, imageName, quantity, idCategory, idProducer)
-					values ('Iphone','chất lượng cao',1000000,'2018-05-17','iphone.png',11,1,1);
-select * from product;
-
-insert into product(nameProduct, description, price, dateCreated, imageName, quantity, idCategory, idProducer)
-values ('Samsung Galaxy Note 9','Mang lại sự cải tiến đặc biệt trong cây bút S-Pen, siêu phẩm Samsung Galaxy Note 9 còn sở hữu dung lượng pin khủng lên tới 4.000 mAh cùng hiệu năng mạnh mẽ vượt bậc, xứng đáng là một trong những chiếc điện thoại cao cấp nhất của Samsung',22990000,'2018-11-30','samsung-galaxy-tab-a-105-inch.png',20,1,4)
-select *
-from product p1, category c, producer p
-where p1.idProduct = 2 and p1.idCategory = c.idCategory and p1.idProducer = p.idProducer;
-
-update product set price = 11111111, quantity = 100 where idProduct = 1;
-
-
-select * from producer limit 4 offset 10;
-
 
 
 
