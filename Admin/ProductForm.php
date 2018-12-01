@@ -1,5 +1,5 @@
 ﻿<?php
-
+    require_once("../DBMySql/DataProvider.php");
     $d = date("Y-m-d")."";
     $note = null;
     if (isset($_GET["status"])) 
@@ -10,6 +10,37 @@
             $note = '<strong style = "color: red;margin-left:350px;">Add Product failed</strong>';
         }    
     }
+    //check : this page is add or edit
+    $status = "add";
+    
+    $image = null;
+    $nameProduct = null;
+    $nameCategory = null;
+    $nameProducer = null;
+    $description = null;
+    $price = null;
+    $quantity = null;
+    $createdDate = null;
+    if (isset($_GET["idProduct"])) { // action like edit, else action like add
+        $status = "edit";
+        $sql = "select nameProduct, description, price, dateCreated, imageName, quantity, nameCategory, nameProducer".
+                "from product p1, category c, producer p".
+                "where p1.idProduct =".$_GET["idProduct"]." and p1.idCategory= c.idCategory and p1.idProducer = p.idProducer";
+        $rs = DataProvider::excuteQuery($sql);
+        while ($row = mysqli_fetch_array($rs)) {
+            $image = $row["nameImage"];
+            $nameProduct = $row["nameProduct"];
+            $nameCategory = $row["nameCategory"];
+            $nameProducer = $row["namePorducer"];
+            $description = $row["description"];
+            $price = $row["price"];
+            $quantity = $row["quantity"];
+            $createdDate = $row["createdDate"];
+        }
+        DataProvider::close();
+    }
+        
+
 ?>
 <div class="container-fluid">
     <div class="row bg-title">
@@ -31,7 +62,7 @@
             <div class="col-md-4 col-xs-12">
                 <div class="white-box">
                     <div class="row text-center">
-                        <img id = "ImageProduct" Class = "visible-lg-inline img-responsive" src = "#" alt = "Not found">
+                        <img id = "ImageProduct" Class = "visible-lg-inline img-responsive" src = "../plugins/images/products/".$image alt = "Not found">
                     </div>
                     <br />
                     <div class="row text-bold">Upload new image</div>
@@ -47,55 +78,77 @@
                             <label class="col-md-12">Name</label>
                             <lable id = "error-nameProduct" style = "color:red;display:none;margin-left:14px;"></lable>
                             <div class="col-md-12">
-                                <input type ="text" Class="form-control form-control-line" name = "nameProduct" id = "nameProduct">
+                                <input type ="text" Class="form-control form-control-line" name = "nameProduct" id = "nameProduct" value =<?=$nameProduct?>>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="example-email" class="col-md-12">Category</label>
                             <div class="col-md-12">
-                                <select Class="form-control form-control-line" name = "nameCategory">
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
+                                <select Class="form-control form-control-line" name = "idCategory">
+                                    <?php 
+                                        $sqlCategory = "select idCategory, nameCategory from Category";
+                                        $rsCategorys = DataProvider::excuteQuery($sqlCategory);
+                                        while ($row = mysqli_fetch_array($rsCategorys)) {
+                                            $name = $row["nameCategory"];
+                                            if ($name == $nameCategory) {
+                                                $name = $name + " *";
+                                            }
+                                            echo '<option value="'.$row["idCategory"].'">'.$name.'</option>';
+                                        }
+                                        DataProvider::close();
+                                                                    
+                                    ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Producer</label>
                             <div class="col-md-12">
-                                <select Class="form-control form-control-line" name = "nameProducer">
-                                    <option value="volvo">Volvo</option>
-                                    <option value="saab">Saab</option>
-                                    <option value="mercedes">Mercedes</option>
-                                    <option value="audi">Audi</option>
+                                <select Class="form-control form-control-line" name = "idProducer">
+                                    <?php 
+                                        $sqlProducer = "select idProducer, nameProducer from Producer";
+                                        $rsProducers = DataProvider::excuteQuery($sqlProducer);
+                                        while ($row = mysqli_fetch_array($rsProducers)) {
+                                            $name = $row["nameProducer"];
+                                            if ($name == $nameProducer) {
+                                                $name = $name + " *";
+                                            }
+                                            echo '<option value="'.$row["idProducer"].'">'.$name.'</option>';
+                                        }
+                                        DataProvider::close();
+                                    ?>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Description</label>
                             <div class="col-md-12">
-                                <textarea class="form-control" rows="2" name = "description"></textarea>
+                                <textarea class="form-control" rows="2" name = "description" value = <?=$description ?>></textarea>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Price </label>
                             <lable id = "error-price" style = "color:red;display;margin-left:14px;"></lable>
                             <div class="col-md-12">
-                                <input type ="text" Class="form-control form-control-line" name = "price" id = "price">    
+                                <input type ="text" Class="form-control form-control-line" name = "price" id = "price" value = <?=$price?>>    
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-md-12">Quantity</label>
                             <lable id = "error-quantity" style = "color:red;display:none;margin-left:14px;"></lable>
                             <div class="col-md-12">
-                                <input type ="text" Class="form-control form-control-line" name = "quantity" id = "quantity">    
+                                <input type ="text" Class="form-control form-control-line" name = "quantity" id = "quantity" value = <?=$quantity ?>>    
                             </div>
                         </div>
                         
                         <div class="form-group">
                             <label class="col-md-12">Start Offer Datetime</label>
                             <div class="col-md-12">
+                                <?php 
+                                    if ($status == "edit") {
+                                        $d = $createdDate;
+                                    }
+                                ?>
                                 <input type="date" name="dateCreated" Class="form-control form-control-line" value=<?=$d ?>>
                             </div>
                         </div>
@@ -127,8 +180,8 @@
         var quantityEle = document.getElementById("quantity");        
         var flag = true;
 
-        if (nameProductEle.value == null || nameProductEle.value == "") {
-            document.getElementById("error-nameProduct").innerHTML = "name product not empty";
+        if (nameProductEle.value == null || nameProductEle.value == "" || nameProductEle.length >= 45) {
+            document.getElementById("error-nameProduct").innerHTML = "name product not empty or not too 45 letter";
             document.getElementById("error-nameProduct").style.display = "block";
             flag = false;
         }

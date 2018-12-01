@@ -8,7 +8,7 @@ create table product
     view int, -- lượng view client click vào
     price double,
     dateCreated datetime,
-    imageName varchar(20),
+    imageName varchar(100),
     quantitySold int,
     quantity int,
     idCategory int,
@@ -77,11 +77,14 @@ insert into producer(nameProducer) values('Apple');
 insert into category(nameCategory) values('Apple');
 
 -- insert producer
+select idProduct,nameProduct,price,quantity from product;
+insert into Product(nameProduct,price,quantity) values('Iphone',10000000,100);
 
+select nameCategory from Category;
 
-
-
-
+insert into product(nameProduct, description, price, dateCreated, imageName, quantity, idCategory, idProducer)
+					values ('Iphone','chất lượng cao',1000000,'2018-05-17','iphone.png',11,1,1);
+select * from product;
 
 
 

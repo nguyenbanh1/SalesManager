@@ -47,7 +47,7 @@
                                     echo        '<a class="fa fa-pencil" href= "NewProducerForm.php?idProducer='.$row["idProducer"].'"></a>';
                                     echo    '</td>';
                                     echo    '<td>';                                       
-                                    echo        '<a class="fa fa-trash" href= "#" id = "trash" OnClick="return confirm('.'Are you sure to delete this producer?'.');"></a>';                                     
+                                    echo        '<a class="fa fa-trash" href= "PageHandler/DeleteProducerHandler.php?idProducer='.$row["idProducer"].'" id = "trash" OnClick="return confirm('.'Are you sure to delete this producer?'.');"></a>';                                     
                                     echo    '</td>';
                                     echo '</tr>';                                    
                                 }

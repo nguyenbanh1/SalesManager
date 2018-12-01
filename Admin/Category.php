@@ -32,16 +32,27 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class=  "fix-rd">
-                                    <td ><?php echo "1" ?></td>
-                                    <td><?php echo "Iphone" ?></td>
-                                    <td >
-                                        <a class="fa fa-pencil" href= "NewCategoryForm.php"></a>
-                                    </td>
-                                    <td>                                        
-                                        <a class="fa fa-trash" href= "#" id = "trash" OnClick="return confirm('Are you sure to delete this category?');"></a>                                       
-                                    </td>
-                                </tr>                                
+                                <?php
+                                    include_once ("../DBMySQL/DataProvider.php");
+                                    $sql = "select * from Category";
+                                    $rs = DataProvider::excuteQuery($sql);
+                                    
+                                    $count = 0; 
+                                    while ($row = mysqli_fetch_array($rs)) {
+                                        $count++;
+                                        echo '<tr class=  "fix-rd">';
+                                        echo    '<td >'.$count.'</td>';
+                                        echo    '<td>'.$row["nameCategory"].'</td>';
+                                        echo    '<td >';
+                                        echo        '<a class="fa fa-pencil" href= "NewCategoryForm.php?idCategory='.$row["idCategory"].'"></a>';
+                                        echo    '</td>';
+                                        echo    '<td>';                                       
+                                        echo        '<a class="fa fa-trash" href= "PageHandler/DeleteCategoryHandler.php?idCategory='.$row["idCategory"].'" id = "trash" OnClick="return confirm('.'Are you sure to delete this Category?'.');"></a>';                                     
+                                        echo    '</td>';
+                                        echo '</tr>';                                    
+                                    }
+                                    DataProvider::close();
+                                ?>                             
                             </tbody>
                         </table>
 

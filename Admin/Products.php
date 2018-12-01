@@ -28,24 +28,35 @@
                                     <th>No.</th>
                                     <th>Product Name</th>
                                     <th>Price</th>
-                                    <th>Summary</th>
+                                    <th>Quantity</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class=  "fix-rd">
-                                    <td ><?php echo "1" ?></td>
-                                    <td><?php echo "Iphone" ?></td>
-                                    <td ></td>
-                                    <td ><?php echo "khong biet" ?></td>
-                                    <td >
-                                        <a class="fa fa-pencil" href= "NewProductForm.php"></a>
-                                    </td>
-                                    <td>                                        
-                                        <a class="fa fa-trash" href= "#" id = "trash" OnClick="return confirm('Are you sure to delete this product?');"></a>                                       
-                                    </td>
-                                </tr>                                
+                                <?php
+                                    include_once ("../DBMySQL/DataProvider.php");
+                                    $sql = "select idProduct, nameProduct, price, quantity from product";
+                                    $rs = DataProvider::excuteQuery($sql);
+                                    
+                                    $count = 0; 
+                                    while ($row = mysqli_fetch_array($rs)) {
+                                        $count++;
+                                        echo '<tr class=  "fix-rd">';
+                                        echo    '<td >'.$count.'</td>';
+                                        echo    '<td>'.$row["nameProduct"].'</td>';
+                                        echo    '<td>'.$row["price"].'</td>';
+                                        echo    '<td>'.$row["quantity"].'</td>';
+                                        echo    '<td >';
+                                        echo        '<a class="fa fa-pencil" href= "NewProductForm.php?idProduct='.$row["idProduct"].'"></a>';
+                                        echo    '</td>';
+                                        echo    '<td>';                                       
+                                        echo        '<a class="fa fa-trash" href= "PageHandler/DeleteProductHandler.php?idProduct='.$row["idProduct"].'" id = "trash" OnClick="return confirm('.'Are you sure to delete this product?'.');"></a>';                                     
+                                        echo    '</td>';
+                                        echo '</tr>';                                    
+                                    }
+                                    DataProvider::close();
+                                ?>                                
                             </tbody>
                         </table>
 
