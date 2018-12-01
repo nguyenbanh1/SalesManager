@@ -5,15 +5,16 @@
     if (isset($_GET["status"])) 
     {
         if ($_GET["status"] == "success") {
-            $note = '<strong style = "color: rgb(128, 128, 255);margin-left:350px;">Add Product Successfully</strong>';
+            $note = '<strong style = "color: rgb(128, 128, 255);margin-left:350px;">Add/Edit Product Successfully</strong>';
         } else {
-            $note = '<strong style = "color: red;margin-left:350px;">Add Product failed</strong>';
+            $note = '<strong style = "color: red;margin-left:350px;">Add/Edit Product failed</strong>';
         }    
     }
     //check : this page is add or edit
     $status = "add";
     
     $image = null;
+    $idProduct = null;
     $nameProduct = null;
     $nameCategory = null;
     $nameProducer = null;
@@ -23,19 +24,20 @@
     $createdDate = null;
     if (isset($_GET["idProduct"])) { // action like edit, else action like add
         $status = "edit";
+        $idProduct = $_GET["idProduct"];
         $sql = "select nameProduct, description, price, dateCreated, imageName, quantity, nameCategory, nameProducer".
-                "from product p1, category c, producer p".
-                "where p1.idProduct =".$_GET["idProduct"]." and p1.idCategory= c.idCategory and p1.idProducer = p.idProducer";
+                " from product p1, category c, producer p".
+                " where p1.idProduct =".$_GET["idProduct"]." and p1.idCategory= c.idCategory and p1.idProducer = p.idProducer";
         $rs = DataProvider::excuteQuery($sql);
         while ($row = mysqli_fetch_array($rs)) {
-            $image = $row["nameImage"];
+            $image = $row["imageName"];
             $nameProduct = $row["nameProduct"];
             $nameCategory = $row["nameCategory"];
-            $nameProducer = $row["namePorducer"];
+            $nameProducer = $row["nameProducer"];
             $description = $row["description"];
             $price = $row["price"];
             $quantity = $row["quantity"];
-            $createdDate = $row["createdDate"];
+            $createdDate = $row["dateCreated"];
         }
         DataProvider::close();
     }
@@ -62,7 +64,7 @@
             <div class="col-md-4 col-xs-12">
                 <div class="white-box">
                     <div class="row text-center">
-                        <img id = "ImageProduct" Class = "visible-lg-inline img-responsive" src = "../plugins/images/products/".$image alt = "Not found">
+                        <img id = "ImageProduct" Class = "visible-lg-inline img-responsive" src = "../plugins/images/products/<?=$image ?>" alt = "Not found">
                     </div>
                     <br />
                     <div class="row text-bold">Upload new image</div>
@@ -78,7 +80,8 @@
                             <label class="col-md-12">Name</label>
                             <lable id = "error-nameProduct" style = "color:red;display:none;margin-left:14px;"></lable>
                             <div class="col-md-12">
-                                <input type ="text" Class="form-control form-control-line" name = "nameProduct" id = "nameProduct" value =<?=$nameProduct?>>
+                                <input type = "hidden" name = "idProduct" value = "<?=$idProduct?>">
+                                <input type ="text" Class="form-control form-control-line" name = "nameProduct" id = "nameProduct" value =<?php echo '"'.$nameProduct.'"'; ?>>
                             </div>
                         </div>
                         <div class="form-group">
@@ -90,10 +93,12 @@
                                         $rsCategorys = DataProvider::excuteQuery($sqlCategory);
                                         while ($row = mysqli_fetch_array($rsCategorys)) {
                                             $name = $row["nameCategory"];
+                                            $check = "";
                                             if ($name == $nameCategory) {
-                                                $name = $name + " *";
+                                                $name = $name." *";
+                                                $check = "selected";
                                             }
-                                            echo '<option value="'.$row["idCategory"].'">'.$name.'</option>';
+                                            echo '<option value="'.$row["idCategory"].'"'.$check.'>'.$name.'</option>';
                                         }
                                         DataProvider::close();
                                                                     
@@ -110,10 +115,12 @@
                                         $rsProducers = DataProvider::excuteQuery($sqlProducer);
                                         while ($row = mysqli_fetch_array($rsProducers)) {
                                             $name = $row["nameProducer"];
+                                            $check = "";
                                             if ($name == $nameProducer) {
-                                                $name = $name + " *";
+                                                $name = $name." *";
+                                                $check = "selected";
                                             }
-                                            echo '<option value="'.$row["idProducer"].'">'.$name.'</option>';
+                                            echo '<option value="'.$row["idProducer"].'"'.$check.'>'.$name.'</option>';
                                         }
                                         DataProvider::close();
                                     ?>
@@ -123,7 +130,7 @@
                         <div class="form-group">
                             <label class="col-md-12">Description</label>
                             <div class="col-md-12">
-                                <textarea class="form-control" rows="2" name = "description" value = <?=$description ?>></textarea>
+                                <textarea class="form-control" rows = "4" name = "description"><?=$description?></textarea>
                             </div>
                         </div>
                         <div class="form-group">

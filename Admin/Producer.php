@@ -33,10 +33,14 @@
                         <tbody>
 
                             <?php
+                                                            
+                                $offsetCurrent = 0;
+                                if (isset($_GET["offset"])) {
+                                    $offsetCurrent = $_GET["offset"];
+                                }
                                 include_once ("../DBMySQL/DataProvider.php");
-                                $sql = "select * from Producer";
-                                $rs = DataProvider::excuteQuery($sql);
-                                
+                                $sql = "select * from Producer limit 4 offset ".$offsetCurrent;
+                                $rs = DataProvider::excuteQuery($sql);                                
                                 $count = 0; 
                                 while ($row = mysqli_fetch_array($rs)) {
                                     $count++;
@@ -56,17 +60,26 @@
 
                         </tbody>
                     </table>
-
+                    <?php
+                        $sql = "select count(*) as 'count' from producer";
+                        $rs = DataProvider::excuteQuery($sql);
+                        $row = mysqli_fetch_array($rs);
+                        $count = $row["count"];
+                        DataProvider::close();
+                    ?>
                     <nav class="numbering">
                         <div class="fixPagination">
-                            <a href="#">&laquo;</a>
-                            <a href="#">1</a>
-                            <a href="#" class = <?="active"?> >2</a>
-                            <a href="#">3</a>
-                            <a href="#">4</a>
-                            <a href="#">5</a>
-                            <a href="#">6</a>
-                            <a href="#">&raquo;</a>
+
+                            
+                            <a href="NewProducer.php?offset=0">&laquo;</a>
+                            <a href="NewProducer.php?offset=<?php if($offsetCurrent <= 0) { echo 0;} else { echo ($offsetCurrent - 4); } ?>"><</a>
+                            <?php
+                                for ($i = 0 ;$i < $count/4 ; $i++) {
+                                    echo '<a href="NewProducer.php?offset='.($i*4).'">'.($i + 1).'</a>';
+                                }
+                            ?>
+                            <a href="NewProducer.php?offset=<?php if($offsetCurrent >= ($count-3)) { echo ($count - 3);} else { echo ($offsetCurrent - 4); } ?>">></a>
+                            <a href="NewProducer.php?offset=<?= (int)($count-3)?>">&raquo;</a>
                         </div>
                     </nav>
                 </div>

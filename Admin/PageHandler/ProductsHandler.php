@@ -8,10 +8,10 @@
     $idProducer = null;
     $description = null;
     $price = null;
-    $quanlity = null;
+    $quantity = null;
     $dateCreated = null;
 
-    if (isset($_FILES["fileToUpload"])) {
+    if (isset($_FILES["fileToUpload"]) && $_FILES["fileToUpload"]["tmp_name"] != null) {
 
         $target_dir = "../../plugins/images/products/";
         $image = basename($_FILES["fileToUpload"]["name"]);
@@ -79,7 +79,7 @@
     }
 
     if (isset($_POST["quantity"])) {
-        $quanlity = $_POST["quantity"];
+        $quantity = $_POST["quantity"];
     }
 
     if (isset($_POST["dateCreated"])) {
@@ -88,10 +88,27 @@
 
     require_once "../../DBMySQl/DataProvider.php";
 
-    
-    $sql = "insert into product(nameProduct, description, price, dateCreated, imageName, quantity, idCategory, idProducer)".
-    "values ('".$nameProduct."','".$description."',$price,'".$dateCreated."','".$image."',".$quanlity.",".$idCategory.",".$idProducer.")";
-    DataProvider::excuteQuery($sql);
-    DataProvider::close();
-    header("Location: ../NewProductForm.php?status=".$status);
+    if (isset($_POST["idProduct"]) && !empty($_POST["idProduct"])) {
+        $sql = "update product set ";
+        if (!empty($image)) {
+            $sql = $sql."imageName = '".$image."',";
+        }
+
+        $sql = $sql."nameProduct ='".$nameProduct."', description = '".$description."',".
+            "price = '".$price."', dateCreated = '".$dateCreated."',".
+            "quantity = '".$quantity."',".
+            "idCategory = '".$idCategory."', idProducer = '".$idProducer."'".
+        " where idProduct = ".$_POST["idProduct"];
+        DataProvider::excuteQuery($sql);
+        DataProvider::close();
+        header("Location: ../NewProducts.php?status=".$status);
+       
+    } else {
+        $sql = "insert into product(nameProduct, description, price, dateCreated, imageName, quantity, idCategory, idProducer)".
+        "values ('".$nameProduct."','".$description."',$price,'".$dateCreated."','".$image."',".$quantity.",".$idCategory.",".$idProducer.")";
+        DataProvider::excuteQuery($sql);
+        DataProvider::close();
+        header("Location: ../NewProductForm.php?status=".$status);
+    }
+
 ?>

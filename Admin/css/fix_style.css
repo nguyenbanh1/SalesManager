@@ -30,10 +30,23 @@ nav.numbering {
     /* margin: 0 4px; */
 }
 
-.fixPagination a.active {
+/*.fixPagination a.active {
+    background-color: #4CAF50;
+    color: white;
+    border: 1px solid #4CAF50;
+}*/
+.fixPagination a:visited {
     background-color: #4CAF50;
     color: white;
     border: 1px solid #4CAF50;
 }
-
-.fixPagination a:hover:not(.active) {background-color: #ddd;}
+.fixPagination a:hover {
+    background-color: pink;
+}
+.fixPagination a:active {
+    background-color: yellow;
+}
+.fixPagination a:link {
+    background-color: green;
+}
+/*.fixPagination a:hover:not(.active) {background-color: #ddd;}*/
