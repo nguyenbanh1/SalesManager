@@ -35,14 +35,21 @@ create table slideImages
 create table orders
 (
 	idOrder int primary key not null auto_increment,
-    message nvarchar(200),
     deliveryDate datetime,
     dateCreated datetime,
-    status int, -- 1 : delivered / 0 : not delivery
+    status nvarchar(20), -- 1 : delivered / 0 : not delivery
     amount double,
     idUser int
 );
-
+create table detailorder
+(
+	idOrder int not null,
+    idProduct int not null,
+    quantity int,
+    price int,
+    totalCost int,
+	constraint primary key(idOrder,idProduct)
+);
 create table user
 (
 	idUser int not null primary key auto_increment,
@@ -53,28 +60,12 @@ create table user
     imageName varchar(20),
     dateOfBirth date,
     email varchar(20),
-    phone varchar(11)
+    phone varchar(11),
+    gender nvarchar(10),
+    addresses nvarchar(100)
 );
-
-create table detailOrder
-(
-	idOrder int,
-    idProduct int,
-    dateCreated datetime,
-    primary key(idOrder, idProduct)
-);
-
-
 -- =========================== Insert DATA ==========================
 -- insert data product
-
-
-
-
-
-
-
-
-
+select * from user;
 
 

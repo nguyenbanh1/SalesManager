@@ -73,7 +73,11 @@
                                 <a href="NewCategory.php?offset=<?php if($offsetCurrent <= 0) { echo 0;} else { echo ($offsetCurrent - 4); } ?>"><</a>
                                 <?php
                                     for ($i = 0 ;$i < $count/4 ; $i++) {
-                                        echo '<a href="NewCategory.php?offset='.($i*4).'">'.($i + 1).'</a>';
+                                        $active = "";
+                                        if ($offsetCurrent == ($i*4)) {
+                                            $active = 'class = "active"';
+                                        }
+                                        echo '<a '.$active.' href="NewCategory.php?offset='.($i*4).'">'.($i + 1).'</a>';
                                     }
                                 ?>
                                 <a href="NewCategory.php?offset=<?php 
