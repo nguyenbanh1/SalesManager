@@ -1,0 +1,280 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+body{
+	font-family: sans-serif;
+	font-size: 14px;
+	width: 100%;
+	margin: 0px;
+
+}
+#container{
+	height: 250px;
+	width: 100%;
+
+}
+#content{
+	height: 1000px;
+	width: 100%	;
+	background: #f3f3f3;
+}
+#top{
+	height: 60px;
+	width: 100%;
+	background: black;
+}
+.menu_top ul li a:hover{
+	color: #999999;
+}
+.menu_top ul li{
+	list-style: none;
+	margin-right: 50px;
+	text-align: right;
+	float: right;
+}
+.menu_top ul li a{
+	height: 60px;
+	line-height: 60px;
+	display: block;
+	text-decoration: none;
+	color: #f1f1f1	;
+	font-size: 17px;
+	font-family: sans-serif;
+}
+#banner{
+	height: 130px;
+	width: 100%px;
+	background: white;
+}
+#banner h1{
+	line-height: 130px;
+	text-align: center;
+	color: orange;
+	margin-left: 550px;
+	font-size: 30px;
+}
+#banner input{
+	min-height: 40px;
+	width:250px;
+}
+#banner form button {
+  width: 50px;
+  min-height:40px;
+  padding: 10px;
+  background: #2b2a2a;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+}
+#menu{
+	height: 60px;
+	width: 100%;
+}
+#menu ul{
+	text-align: center;
+	background: orange;
+
+}
+#menu ul li{
+	display: inline-table;
+	width: 200px;
+	height: 60px;
+	line-height: 60px;
+}
+#menu ul li a{
+	display: block;
+	text-decoration: none;
+	color: #ffff;
+	background: orange;
+
+}
+#menu ul li a:hover{
+	background: #FDF5E6;
+	color: #333;
+}
+#menu ul li > .sub-menu{
+	display: none;
+	position: relative;
+}
+#menu ul li:hover .sub-menu{
+	display: block;
+	position: absolute;
+}
+
+#slider{
+	margin: 0px auto;
+	width: 750px;
+	height: 300px;
+	border: 1px solid #333;
+	position: relative;
+}
+.slide{
+	width: 600px;
+	height: 300px;
+
+}
+#menu>ul>li{
+		position: relative;
+}
+#menu ul li > .sub-menu {
+		position: absolute;
+		display: none;
+				
+}
+
+#content{
+	min-height: 100%;
+	width: 100%;
+
+}
+
+#next{
+	text-translogform: uppercase;
+	top: 130px;
+	right: 20px;
+	position: absolute;
+}
+/*--footer--*/
+#footer{
+	background: #2b2a2a;
+	min-height: 400px;
+	width: auto;
+	padding: 5em 0 2em;
+
+}
+.w3_footer_grid{
+	margin-left: 250px;
+}
+.w3_footer_grid h3 {
+    color: #ffffff;
+    font-size: 1.5em;
+    margin-bottom: 1.8em;
+    text-transform: uppercase;
+}
+.w3_footer_grid ul li {
+    list-style-type: none;
+    margin-bottom: 1em;
+    color: #afafaf;
+    font-size: 14px;
+}
+.w3_footer_grid ul.address li i {
+    color:#fe9126;
+    border: 1px solid #fe9126;
+    padding: .5em;
+    margin-right: 1em;
+}
+.w3_footer_grid ul.address li span {
+    display: block;
+    margin-left: 3em;
+}
+a{
+    color: #afafaf;
+    text-decoration: none;
+}
+.w3_footer_grid ul li a:hover {
+	color:#fe9126;
+}
+/*HomeProduct*/
+.homeproduct li .price{
+	display:block;
+	overflow:hidden;
+	padding:5px 10px 10px 10px;
+}
+.homeproduct{
+	clear:both;
+	display:block;
+	background:#fff;
+	display:flex;
+	flex-flow:row wrap;
+	flex-flow:row wrap;
+	flex:1 100%;
+	border-top:1px solid #eee;
+	margin-bottom:auto;
+}
+.homeproduct li a{
+	display:block;
+	overflow:hidden;
+	background:#fff;
+	padding:10px ;
+	text-decoration: none; 	
+}
+.caption{
+	min-height: 60px;
+	background: #f3f3f3;
+}
+.caption h3{
+	padding-top: 10px;
+	display: inline;
+	clear: both;
+	line-height: 60px;
+	margin-left: 10px;
+	color: blue;
+}
+.homeproduct button{
+	font-family: arian;
+	color: #696969;
+}
+.homeproduct  buttton:hover{
+	background: orange;
+}
+.homeproduct ul{		
+	width: 100%;
+}
+.price strong{
+	color: red;
+}
+.homeproduct ul li a:hover h3{
+	color:#288ad6;
+	text-decoration: none;
+}
+.homeproduct li img{
+	display:block;
+	width:180px;
+	height:180px;
+	margin:15px auto;
+}
+.homeproduct li{
+	float:left;
+	position:relative;
+	width:19.917%;
+	overflow:hidden;
+	border-right:1px solid #eee;
+	border-bottom:1px solid #eee;
+}
+.Cty p a:hover{
+	color: orange;
+	text-decoration: none;
+}
+/*-------Login*/
+
+.row{
+ margin-top: 10%;
+}
+
+.w3_footer_grids a:hover{
+	color:#fe9126;
+	text-decoration: none;
+}
+p{
+	color: #afafaf;
+	background:#2b2a2a;
+	text-align: center;
+
+}
+label{
+    font-family: "Homer Simpson", cursive;
+    font-size:15px;
+}
+
+
+
+#col-Login{
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  min-height: 100px;
+  padding: 20px;
+}
