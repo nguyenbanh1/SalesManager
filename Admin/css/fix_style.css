@@ -29,11 +29,9 @@ nav.numbering {
     border: 1px solid #ddd;
     /* margin: 0 4px; */
 }
-
 .fixPagination a.active {
     background-color: #4CAF50;
     color: white;
     border: 1px solid #4CAF50;
 }
-
 .fixPagination a:hover:not(.active) {background-color: #ddd;}

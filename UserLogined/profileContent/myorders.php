@@ -1,42 +1,18 @@
-﻿<script>
-    function ClickEye() {
-
-        if (document.getElementById("detailsOrder").style.display == "") {
-            document.getElementById("detailsOrder").style.display = "none";
-        } else {
-            document.getElementById("detailsOrder").style.display = "";
-        }      
-    }
-</script>
 <div class="container-fluid">
-    <div class="row bg-title">
-        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-            <h4 class="page-title">Orders</h4>
-        </div>
-        <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-            <ol class="breadcrumb">
-                <li><a href="#">Dashboard</a></li>
-                <li class="active">Orders Management</li>
-            </ol>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
     <!-- /row -->
     <div class="row">
         <div class="col-sm-12">
             <div class="white-box">
                 <h3 class="box-title">Orders</h3>
-
                 <div id="table-orders" class="table-responsive">
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>No.</th>
-                                <th>Customer</th>
-                                <th>Order Datetime</th>
-                                <th>Total Cost</th>
-                                <th>View Details</th>
-                                <th class = "text-left">Status</th>
+                                <th class = "text-center" >No.</th>
+                                <th class = "text-center" >Order Datetime</th>
+                                <th class = "text-center" >Total Cost</th>
+                                <th class = "text-center">View Details</th>
+                                <th class = "text-center">Status</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,40 +22,30 @@
                                     $offsetCurrent = $_GET["offset"];
                                 } 
                                 require_once("../DBMySql/DataProvider.php");
-                                $sql = "select o.idOrder, o.dateCreated, o.status, o.amount, u.idUser, u.username".
-                                " from orders o, user u ".
-                                "where o.idUser = u.idUser limit 4 offset ".$offsetCurrent;
+                                $sql = "select o.idOrder, o.dateCreated, o.status, o.amount".
+                                " from orders o".
+                                " where o.idUser = ".$idUser." limit 4 offset ".$offsetCurrent;
                                 $rs = DataProvider::excuteQuery($sql);
                                 $count = 0;
                                 $listIdOrder = array();
                                 while ($row = mysqli_fetch_array($rs)) {
                                     $count++;
                                     $listIdOrder[$count] = $row["idOrder"];
+                                    echo '<div onclick = "ClickEye()"';
                                     echo '<tr>';
-                                    echo '<td class="text-center">'.$count.'</td>';
-                                    echo '<td class = "text-center">'.$row["username"].'</td>';
+                                    echo '<td class = "text-center">'.$count.'</td>';
                                     echo '<td class = "text-center">'.$row["dateCreated"].'</td>';
                                     echo '<td class = "text-center">'.$row["amount"].'</td>';
-                                    echo '<td class="text-center">';
-                                    echo    '<a href="#"<i class="fa fa-eye" onclick = "ClickEye()"></a>';
-                                    echo '</td>';
-                                    $status = $row["status"];
-                                    if (isset($_GET["status"])) {
-                                            $status = $_GET["status"];
-                                    }
-                                    $color = "btn btn-primary";
-                                    if ($status == "delivering") {
-                                        $color = "btn btn-warning";
-                                    }
-                                    echo '<td class="text-left">';
-                                    echo '<div class="dropdown">';    
-                                    echo    '<button class="'.$color.'"  type="button" data-toggle="dropdown">'.$status.'<span class="caret"></span></button>';
-                                    echo    '<ul class="dropdown-menu">';
-                                    echo    '<li><a href="PageHandler/UpdateOrderHandler.php?idOrder='.$row["idOrder"].'&status=delivering">delivering</a></li>';
-                                    echo    '<li><a href="PageHandler/UpdateOrderHandler.php?idOrder='.$row["idOrder"].'&status=delivered">delivered</a></li>';
-                                    echo    '</ul>';
                                     echo '</div>';
+                                    echo '<td class = "text-center">';
+                                    echo    '<a href="#" class="glyphicon glyphicon-expand" onclick = "ClickEye()"></a>';
                                     echo '</td>';
+                                    if ($row["status"] == "delivered") {
+                                        echo '<td class="text-center" style = "color:blue;">'.$row["status"].'</td>';
+                                    } else {
+                                        echo '<td class="text-center" style = "color:red;">'.$row["status"].'</td>';
+                                    }
+                                    
                                 }
                                 DataProvider::close();
                             ?>
