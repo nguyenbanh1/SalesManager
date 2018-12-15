@@ -210,14 +210,14 @@ a{
 	clear: both;
 	line-height: 60px;
 	margin-left: 10px;
-	color: blue;
+	color: #ffcc00;
 }
 .homeproduct button{
 	font-family: arian;
-	color: #696969;
+	color: black;
 }
-.homeproduct  buttton:hover{
-	background: orange;
+.homeproduct li button:hover{
+	color: white;
 }
 .homeproduct ul{		
 	width: 100%;
@@ -229,9 +229,15 @@ a{
 	color:#288ad6;
 	text-decoration: none;
 }
+.buy button{
+	color: black;
+	background: #ccc
+}
+.homeproduct ul li a button{
+}
 .homeproduct li img{
 	display:block;
-	width:180px;
+	width:180px;	
 	height:180px;
 	margin:15px auto;
 }
@@ -246,6 +252,9 @@ a{
 .Cty p a:hover{
 	color: orange;
 	text-decoration: none;
+}
+.left-filter-panel a{
+	
 }
 /*-------Login*/
 
