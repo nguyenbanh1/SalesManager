@@ -61,11 +61,8 @@ create table user
     dateOfBirth date,
     email varchar(20),
     phone varchar(11),
-    gender nvarchar(10),
     addresses nvarchar(100)
 );
 -- =========================== Insert DATA ==========================
 -- insert data product
-select * from user;
-
 

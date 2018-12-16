@@ -12,10 +12,11 @@ body{
 #container{
 	height: 250px;
 	width: 100%;
+	position: relative;
 
 }
 #content{
-	height: 1000px;
+	height: 1200px;
 	width: 100%	;
 	background: #f3f3f3;
 }
@@ -30,13 +31,13 @@ body{
 .menu_top ul li{
 	list-style: none;
 	margin-right: 50px;
+	margin-top:20px;
 	text-align: right;
 	float: right;
 }
 .menu_top ul li a{
-	height: 60px;
-	line-height: 60px;
-	display: block;
+	height: 40px;
+	line-height: 20px;
 	text-decoration: none;
 	color: #f1f1f1	;
 	font-size: 17px;
@@ -44,105 +45,51 @@ body{
 }
 #banner{
 	height: 130px;
-	width: 100%px;
+	width: 100%;
 	background: white;
 }
 #banner h1{
 	line-height: 130px;
 	text-align: center;
 	color: orange;
-	margin-left: 550px;
+	margin-left: 500px;
 	font-size: 30px;
 }
 #banner input{
 	min-height: 40px;
-	width:250px;
+	width:300px;
 }
-#banner form button {
+#banner form button{
   width: 50px;
   min-height:40px;
-  padding: 10px;
   background: #2b2a2a;
   color: white;
   font-size: 17px;
   border: 1px solid grey;
   border-left: none;
 }
-#menu{
-	height: 60px;
-	width: 100%;
+/* Menu */
+#menu {
+	padding-left: 150px;
+	background:orange;
 }
-#menu ul{
-	text-align: center;
-	background: orange;
-
+.menu-frame{
+	margin-left: 30px;
+	padding:20px;
 }
-#menu ul li{
-	display: inline-table;
-	width: 200px;
-	height: 60px;
-	line-height: 60px;
-}
-#menu ul li a{
-	display: block;
+.menu-frame a{
 	text-decoration: none;
-	color: #ffff;
-	background: orange;
-
+	color:black;
 }
-#menu ul li a:hover{
-	background: #FDF5E6;
-	color: #333;
-}
-#menu ul li > .sub-menu{
-	display: none;
-	position: relative;
-}
-#menu ul li:hover .sub-menu{
-	display: block;
-	position: absolute;
-}
-
-#slider{
-	margin: 0px auto;
-	width: 750px;
-	height: 300px;
-	border: 1px solid #333;
-	position: relative;
-}
-.slide{
-	width: 600px;
-	height: 300px;
-
-}
-#menu>ul>li{
-		position: relative;
-}
-#menu ul li > .sub-menu {
-		position: absolute;
-		display: none;
-				
-}
-
-#content{
-	min-height: 100%;
-	width: 100%;
-
-}
-
-#next{
-	text-translogform: uppercase;
-	top: 130px;
-	right: 20px;
-	position: absolute;
+.menu-frame a:hover{
+	color:darkslategrey;
 }
 /*--footer--*/
 #footer{
 	background: #2b2a2a;
-	min-height: 400px;
+	min-height: 330px;
 	width: auto;
-	padding: 5em 0 2em;
-
+	padding:30px;
 }
 .w3_footer_grid{
 	margin-left: 250px;
@@ -150,7 +97,7 @@ body{
 .w3_footer_grid h3 {
     color: #ffffff;
     font-size: 1.5em;
-    margin-bottom: 1.8em;
+    margin-bottom: 30px;
     text-transform: uppercase;
 }
 .w3_footer_grid ul li {
@@ -162,7 +109,7 @@ body{
 .w3_footer_grid ul.address li i {
     color:#fe9126;
     border: 1px solid #fe9126;
-    padding: .5em;
+	padding: 0.5em;
     margin-right: 1em;
 }
 .w3_footer_grid ul.address li span {
@@ -233,8 +180,6 @@ a{
 	color: black;
 	background: #ccc
 }
-.homeproduct ul li a button{
-}
 .homeproduct li img{
 	display:block;
 	width:180px;	
@@ -253,13 +198,10 @@ a{
 	color: orange;
 	text-decoration: none;
 }
-.left-filter-panel a{
-	
-}
 /*-------Login*/
 
 .row{
- margin-top: 10%;
+ margin-top: 5%;
 }
 
 .w3_footer_grids a:hover{
@@ -276,14 +218,16 @@ label{
     font-family: "Homer Simpson", cursive;
     font-size:15px;
 }
-
-
-
 #col-Login{
   align-items: center;
   flex-direction: column; 
   justify-content: center;
-  width: 100%;
-  min-height: 100px;
+  width: 500px;
+  min-height: 50px;
   padding: 20px;
+  margin-left:350px;
+}
+.title{
+	padding:10px;
+
 }
