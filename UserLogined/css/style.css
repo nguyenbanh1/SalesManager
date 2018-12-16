@@ -138,3 +138,49 @@ nav.numbering {
   border: 1px solid #4CAF50;
 }
 .fixPagination a:hover:not(.active) {background-color: #ddd;}
+
+
+/*dropdown*/
+.dropbtn {
+  background-color: black;
+  color: white;
+  /* padding: 5px; */
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 150px;
+  color:black;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.dropdown-content a {
+  color: black;
+  /* padding: 12px 16px; */
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color:#ddd;
+  border-radius: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  font-size: 18px;
+}

@@ -13,98 +13,107 @@
 	<script type="text/javascript" src="js/slider.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	
-
-
+	<link rel = 'stylesheet' href = "UserLogined/css/style.css">
 </head>
 <body>
 	<div id="container">
 			<div id="top">
 				<div class="menu_top">	
 					<ul style="padding-right: 50px ">
-						<li><a href="#">
-				        	<img height="40px" style="padding-top: 5px;" width="40px" src="img/iconcart.png">
-				        </a></li>
-						<li><a href="#"title="Help"><span class="glyphicon glyphicon-wrench"></span> Help</a></li>
-						<li><a href="login/login.html"title="Login"> <span class="glyphicon glyphicon-lock"></span> Login</a></li>
-						<li><a href="create login/createlg.html" title="Create account"><i class='fas fa-address-card' style='font-size:20px'></i> Create account</a></li>
-						
-						
+						<li>
+							<a href="#"><img style = "margin-top:-5px;" height="30px" width="40px" src="img/iconcart.png"></a>
+						</li>
+						<li>
+							<a href="#"title="Help"><span class="glyphicon glyphicon-wrench"></span> Help</a>
+						</li>
+						<?php
+							session_start();
+							if (isset($_SESSION["user"])) {
+								$username = $_SESSION["user"]["username"];
+								echo '<li style = "margin-top:20px;">';
+								echo '<div class="dropdown">';
+								echo '<button class="dropbtn">'.$username.'</button>';
+								echo '<div class="dropdown-content">';
+								echo '<a href="#" style = "color:black;">My Account</a>';
+								echo '<a href="#" style = "color:black;">My Orders</a>';
+								echo '<a href="login/LogoutHandler.php" style = "color:black;">Log out</a>';
+								echo '</div>';
+								echo '</li>';
+								if (isset($_SESSION["user"]["type"]) && strtolower($_SESSION["user"]["type"]) == "admin") {
+									echo '<li>';
+									echo '<a href = "#">Admin</a>';
+									echo '</li>';
+								}
+							} else {
+								echo '<li><a href="login/login.php" title="Login"> <span class="glyphicon glyphicon-lock"></span> Login</a></li>';
+								echo '<li><a href="login/createAccount.php" title="Create account"><i class="fas fa-address-card" style="font-size:20px"></i> Create account</a></li>';
+					
+							}
+						?>
 					</ul>
 				</div>
 				
 			</div>
 			<div id="banner">
-				<h1 style="display: inline;">SALE MANAGER</h1>
-				<div  style="display: inline;padding-right: 20px; margin-left: 200px;">
-					<form style="display: inline" action="#">
+				<h1 style="display:inline;">SALE MANAGER</h1>
+				<div style="display:inline;margin-left:120px;">
+					<form action="#" style = "display:inline">
 						<input type="test"  placeholder="Vui lòng nhập sản phẩm...." >
 						<button type="submit"><i class="fa fa-search"></i></button>
 					</form>
-				</div>	
-				
-					
+				</div>				
 			</div>
-			<div id="menu">	
-				<ul>
-					<li>
-						<a href="file:///C:/Users/HiepSiMu/Documents/Sublime%20Text/%C4%90%E1%BB%93%20%C3%A1n%20CK/SalesManager/index.html" title="Trang Chủ"class="active">
-							<span class="glyphicon glyphicon-home"></span>
-						Trang chủ</a>
-					</li>	
-					<li><a href="#" title="Điện Thoại"><span class="glyphicon glyphicon-phone"></span> Điện Thoại<b class="	caret"></b>	</a>
-						<ul class="sub-menu">
-							<li><a href="#" title="Đồng Hồ">Apple</a></li><br>
-							<li><a href="#" title="Đồng Hồ">SanmSung</a></li><br>
-							<li><a href="#" title="Đồng Hồ">Oppo</a></li><br>
-							<li><a href="#" title="Đồng Hồ">Xiaomi</a></li><br>
-							<li><a href="#" title="Đồng Hồ"> Huawai</a></li><br>
-
-						</ul>
-					</li>
-					<li class="menu-item"><a href="#" title="Linh Kiện Điện Thoại"> <span class="glyphicon glyphicon-headphones"></span> Linh Kiện Điện Thoại<b class="caret"></b></a>
-						<ul class="sub-menu">
-							<li><a href="#" title="Đồng Hồ">aaaaaaaaaaaâ</a></li><br>
-							<li><a href="#" title="Đồng Hồ">bbbbbbbbbbbbbbbb</a></li><br>
-							<li><a href="#" title="Đồng Hồ">ccccccccccccc</a></li><br>
-							<li><a href="#" title="Đồng Hồ">dddddddd</a></li><br>
-							<li><a href="#" title="Đồng Hồ"> eeeeeeeê</a></li><br>
-
-						</ul>
-					</li>
-					<li class="menu-item"><a href="#" title="LapTop"><i class="material-icons" style="font-size: 17px; padding-top: 0.5px;" >laptop</i> LapTop<b class="caret"></b></a>
-						<ul class="sub-menu">
-							<li><a href="#" title="Đồng Hồ">aaaaaaaaaaaâ</a></li><br>
-							<li><a href="#" title="Đồng Hồ">bbbbbbbbbbbbbbbb</a></li><br>
-							<li><a href="#" title="Đồng Hồ">ccccccccccccc</a></li><br>
-							<li><a href="#" title="Đồng Hồ">dddddddd</a></li><br>
-							<li><a href="#" title="Đồng Hồ"> eeeeeeeê</a></li><br>
-
-						</ul>
-					</li>
-					<li class="menu-item"><a href="#" title="Máy Tính Bản"><i class="material-icons" style="font-size: 15px;">tablet_mac</i> Máy Tính Bản<b class="caret"></b></a>
-						<ul class="sub-menu">
-							<li><a href="#" title="Đồng Hồ">aaaaaaaaaaaâ</a></li><br>
-							<li><a href="#" title="Đồng Hồ">bbbbbbbbbbbbbbbb</a></li><br>
-							<li><a href="#" title="Đồng Hồ">ccccccccccccc</a></li><br>
-							<li><a href="#" title="Đồng Hồ">dddddddd</a></li><br>
-							<li><a href="#" title="Đồng Hồ"> 	eeeeeeeê</a></li><br>
-						</ul>
-					</li>
-					<li class="menu-item"><a href="#" title="Nhà Sản Xuất">Nhà Sản Xuất<b class="caret"></b></a>
-						<ul class="sub-menu">
-							<li><a href="#" title="Đồng Hồ">aaaaaaaaaaaâ</a></li><br>
-							<li><a href="#" title="Đồng Hồ">bbbbbbbbbbbbbbbb</a></li><br>
-							<li><a href="#" title="Đồng Hồ">ccccccccccccc</a></li><br>
-							<li><a href="#" title="Đồng Hồ">dddddddd</a></li><br>
-							<li><a href="#" title="Đồng Hồ"> eeeeeeeê</a></li><br>
-						</ul>
-					</li>
-		</ul>
+			<div id="menu">
+				<div style = "display:inline-block" class = "menu-frame">
+					<a href = "index.php"><span class="glyphicon glyphicon-home"></span>Trang Chủ</a>
+				</div>
+				<div class="dropdown menu-frame">
+    				<a href = "#" class="dropdown-toggle" data-toggle="dropdown">Điện Thoại
+    				<span class="caret"></span></a>
+    				<ul class="dropdown-menu">
+						<li><a href="#">Xiaomi</a></li>
+						<li><a href="#">Iphone</a></li>
+						<li><a href="#">SAMSUNG</a></li>
+    				</ul>
+ 				</div>
+				 <div class="dropdown menu-frame">
+    				<a href = "#" class="dropdown-toggle" data-toggle="dropdown">Linh Kiện Điện Thoại
+    				<span class="caret"></span></a>
+    				<ul class="dropdown-menu">
+						<li><a href="#">aaaaa</a></li>
+						<li><a href="#">bbbbb</a></li>
+						<li><a href="#">ccccc</a></li>
+    				</ul>
+ 				</div>
+				<div class="dropdown menu-frame">
+    				<a href = "#" class="dropdown-toggle" data-toggle="dropdown">Lap Top
+    				<span class="caret"></span></a>
+    				<ul class="dropdown-menu">
+						<li><a href="#">aaaaaa</a></li>
+						<li><a href="#">bbbbbb</a></li>
+						<li><a href="#">cccccc</a></li>
+    				</ul>
+				 </div>
+				 <div class="dropdown menu-frame">
+    				<a href = "#" class="dropdown-toggle" data-toggle="dropdown">Máy Tính Bảng
+    				<span class="caret"></span></a>
+    				<ul class="dropdown-menu">
+						<li><a href="#">aaaaaaaaaaaaaaaa></li>
+						<li><a href="#">bbbbbbbbbbbbbbbb</a></li>
+						<li><a href="#">cccccccccccccccc</a></li>
+    				</ul>
+				 </div>
+				 <div class="dropdown menu-frame">
+    				<a href = "#" class="dropdown-toggle" data-toggle="dropdown">Nhà Sản Xuất
+    				<span class="caret"></span></a>
+    				<ul class="dropdown-menu">
+						<li><a href="#">aaaaaaaaaaaaaaaa></li>
+						<li><a href="#">bbbbbbbbbbbbbbbb</a></li>
+						<li><a href="#">cccccccccccccccc</a></li>
+    				</ul>
+				 </div>
 			</div>
-
-	</div>	
+		</div><br><br>
 	<div id="content">
 		<div class="top-brands">
 			<div class="caption">
@@ -122,7 +131,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					</li>
@@ -136,7 +145,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -151,7 +160,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -166,7 +175,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -181,7 +190,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -205,7 +214,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -220,7 +229,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -235,7 +244,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -250,7 +259,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg">
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -265,7 +274,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -289,7 +298,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -304,7 +313,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -319,7 +328,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -334,7 +343,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -349,7 +358,7 @@
 						            <button type="button" class="btn" style="background: red;"><b>Mua Hàng</b></button>
 						         </div>           
 					     </a>
-					     <button style="margin-left: 10px;"" type="button"  class="btn btn-info btn-lg" >
+					     <button style="margin-left: 10px;" type="button"  class="btn btn-info btn-lg" >
 				          <span class="glyphicon glyphicon-shopping-cart"></span> Thêm Vào Giỏ
 				        </button>
 					    </a>
@@ -357,8 +366,7 @@
 
 				</ul>
 		</div>
-
-	</div>
+	</div><br><br>
 	<div id="footer">
 		<div class="w3_footer_grids">
 			<div class="col-md-3 w3_footer_grid">
@@ -372,19 +380,19 @@
             </div>
             <div class="col-md-3 w3_footer_grid">
                 <h3>Contact</h3>
-
                 <ul class="address">
                     <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>227 Nguyễn Văn Cừ Quận 3 TP.HCM</li>
                     <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">lnqdloc@gmail.com</a></li>
                     <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">Tangkhannguyen@gmail.com</a></li>
                 </ul>
             </div>
-		</div>
+		</div><br>
 	</div>
-	<div class="Cty">
-            	<p>
-					Công Ty Trách Nhiệm Hữu Hạn 2 Thành Viên | Design By <a href="https://www.facebook.com/profile.php?id=100003983416679">Hiệp Sĩ Mù</a>
-				</p>
+	<div>
+		<p>
+			Công Ty Trách Nhiệm Hữu Hạn 2 Thành Viên | Design By <a href="https://www.facebook.com/profile.php?id=100003983416679">Hiệp Sĩ Mù</a>
+		</p>
     </div>
+	
 </body>
 </html>
