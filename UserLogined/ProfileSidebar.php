@@ -21,7 +21,6 @@
     $dateOfBirth = null;
     $email = "";
     $phone = "";
-    $gender = "";
     if (isset($_GET["idUser"]) && $_GET["idUser"] != "") {
         $idUser = $_GET["idUser"];
         $sql = "select * from User where idUser = ".$idUser;
@@ -34,7 +33,6 @@
             $dateOfBirth = $row["dateOfBirth"];
             $email = $row["email"];
             $phone = $row["phone"];
-            $gender = $row["gender"];
         }
     }
 ?>
@@ -57,6 +55,7 @@
     <!-- SIDEBAR BUTTONS -->
     <div class="profile-userbuttons">
         <form action = "profileContent/UploadAvatarHandler.php" method = "post"  enctype="multipart/form-data">
+            <input type = "hidden" value = "<?=$idUser?>" name = "idUser">
             <input type = "file" id = "FileUploadAvatar" name = "FileUploadAvatar" Class = "btn btn-sm">
             <input type = "submit" value = "Upload" Class="btn btn-sm btn-success">
         </form>  
@@ -75,8 +74,11 @@
             <li id = "myorders" style = "<?=$masterMyOrdersPage?>">
                 <a href = "masterMyOrders.php?idUser=<?=$idUser?>" class = "glyphicon glyphicon-shopping-cart"> My Orders</a>
             </li>
+            <li id = "Back to Website">
+                <a href = "../index.php" class="glyphicon glyphicon-log-out"> Website</a>
+            </li>
             <li id = "logout">
-                <a href = "#" class="glyphicon glyphicon-log-out"> Logout</a>
+                <a href = "../login/LogoutHandler.php" class="glyphicon glyphicon-log-out"> Logout</a>
             </li>
         </ul>
     </div>

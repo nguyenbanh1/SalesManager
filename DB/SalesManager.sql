@@ -34,10 +34,10 @@ create table slideImages
 
 create table orders
 (
-	idOrder int primary key not null auto_increment,
+	idOrder int primary key not null,
     deliveryDate datetime,
     dateCreated datetime,
-    status nvarchar(20), -- 1 : delivered / 0 : not delivery
+    status nvarchar(20), -- 1 : delivered / 0 : delivering
     amount double,
     idUser int
 );
@@ -59,10 +59,26 @@ create table user
     type nvarchar(20), -- customer or admin
     imageName varchar(20),
     dateOfBirth date,
-    email varchar(20),
+    email varchar(100),
     phone varchar(11),
     addresses nvarchar(100)
 );
--- =========================== Insert DATA ==========================
--- insert data product
+
+select idProduct, nameProduct, price, imageName from product order by quantitySold desc;
+select idProduct, nameProduct, price, imageName from product where idProducer = 1 order by dateCreated desc;
+
+
+-- search
+select p.idProduct, p.nameProduct, p.price, p.imageName
+from product p join category c on p.idCategory = c.idCategory
+join producer pc on p.idProducer = pc.idProduscer
+where pc.nameProducer = '22990000' or c.nameCategory = '22990000' or p.nameProduct = '' or p.price = '22990000';
+
+
+
+
+
+
+
+
 

@@ -72,6 +72,7 @@
                                 <a href="NewCategory.php?offset=0">&laquo;</a>
                                 <a href="NewCategory.php?offset=<?php if($offsetCurrent <= 0) { echo 0;} else { echo ($offsetCurrent - 4); } ?>"><</a>
                                 <?php
+                                if ($count / 4 < 5) { //Xuất tối đa page khi page nhỏ hơn 5
                                     for ($i = 0 ;$i < $count/4 ; $i++) {
                                         $active = "";
                                         if ($offsetCurrent == ($i*4)) {
@@ -79,7 +80,40 @@
                                         }
                                         echo '<a '.$active.' href="NewCategory.php?offset='.($i*4).'">'.($i + 1).'</a>';
                                     }
-                                ?>
+                                } else {
+                                    if ($offsetCurrent / 4 < 5) {
+                                        for ($i = 0 ;$i < 5 ; $i++) {
+                                            $active = "";
+                                            if ($offsetCurrent == ($i*4)) {
+                                                $active = 'class = "active"';
+                                            }
+                                            echo '<a '.$active.' href="NewCategory.php?offset='.($i*4).'">'.($i + 1).'</a>';
+                                        }
+                                    } else {
+                                        if ($offsetCurrent / 4 < $count/4 - 3) {
+                                            $page = $offsetCurrent / 4;
+                                            for ($i = $page - 2; $i <= $page + 2 ; $i++) {
+                                                $active = "";
+                                                if ($offsetCurrent == ($i*4)) {
+                                                    $active = 'class = "active"';
+                                                }
+                                                echo '<a '.$active.' href="NewCategory.php?offset='.($i*4).'">'.($i + 1).'</a>';
+                                            }
+                                        } else {
+                                            
+                                            $page = (int)($count/4) - 2;
+                                            for ($i = $page; $i <= $page + 2 ; $i++) {
+                                                $active = "";
+                                                if ($offsetCurrent == ($i*4)) {
+                                                    $active = 'class = "active"';
+                                                }
+                                                echo '<a '.$active.' href="NewCategory.php?offset='.($i*4).'">'.($i + 1).'</a>';
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            ?>
                                 <a href="NewCategory.php?offset=<?php 
                                                                 if ($count <= 4) {
                                                                     echo 0;

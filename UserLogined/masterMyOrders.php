@@ -5,6 +5,7 @@
     <!-- Bootstrap Core CSS -->
     <link href="../Admin/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href = "css/style.css" rel = "stylesheet">
+    <script type="text/javascript" scr="js/query.js"></script>
     <!-- Menu CSS -->
 </head>
 <body>
@@ -24,12 +25,13 @@
     </div>
     <script src = "js/changeColor.js"></script>
     <script>
-        function ClickEye() {
-
-            if (document.getElementById("detailsOrder").style.display == "") {
-                document.getElementById("detailsOrder").style.display = "none";
+        function ClickEye(id) {
+            console.log(id);
+            if (document.getElementById(id).style.display == "") {
+                document.getElementById(id).style.display = "none";
             } else {
-                document.getElementById("detailsOrder").style.display = "";
+                
+                document.getElementById(id).style.display = "";                
             }      
         }
     </script>
