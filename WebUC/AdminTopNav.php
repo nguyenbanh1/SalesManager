@@ -21,7 +21,7 @@
         <!-- /Logo -->
         <ul class="nav navbar-top-links navbar-right pull-right">
             <li style ="right:40px;">
-                <a href="#">&laquo; Back to Website</a>
+                <a href="../index.php">&laquo; Back to Website</a>
             </li>
             <li CssClass="profile-pic" style="color:white;top:10px;right:35px;">
                 <img src="../plugins/images/users/aya_1.jpeg" alt="user-img" width="36" height ="36"/>

@@ -104,7 +104,12 @@
 				<div class="homeproduct">
 					<?php 
 						require_once "DBMySql/DataProvider.php";
-						$sql = "select idProduct, nameProduct, price, imageName from product order by dateCreated desc limit 10";
+						$sql = "";
+						if (isset($_GET["idCategory"])) {
+							$sql = "select idProduct, nameProduct, price, imageName from product where idCategory = ".$_GET["idCategory"]." order by dateCreated desc";	
+						} else if (isset($_GET["idProducer"])) {
+							$sql = "select idProduct, nameProduct, price, imageName from product where idProducer = ".$_GET["idProducer"]." order by dateCreated desc";
+						}
 						$rs = DataProvider::excuteQuery($sql);
 						while ($row = mysqli_fetch_array($rs)) {
 							echo '<div class ="product">';
@@ -119,64 +124,11 @@
 							echo '</a>';
 							echo '</div>';		
 						}
-						DataProvider::close();					
+						DataProvider::close();	
+									
 					?>		
 				</div>
 			</div>
-			
-			<div class = "distance">
-				<div class="caption">
-					<h3><b><i class='far fa-eye'></i> Most Bought Products</b></h3>
-				</div>
-				<div class="homeproduct">
-					<?php
-						require_once "DBMySql/DataProvider.php";
-						$sql = "select idProduct, nameProduct, price, imageName from product order by quantitySold desc limit 10";
-						$rs = DataProvider::excuteQuery($sql);
-						while ($row = mysqli_fetch_array($rs)) {
-							echo '<div class ="product">';
-							echo '<a href="#">';
-							echo '<img src="plugins/images/products/'.$row["imageName"].'">';  
-							echo '<h5>'.$row["nameProduct"].'</h5>'; 
-							echo '<strong>'.$row["price"].'₫</strong>'; 
-							echo '</a>';
-							echo '<a href = "#" class="btn btn-info" style = "margin-left:5px;"><b>Mua Hàng</b></a>';
-							echo '<a href = "#" style = "margin-top:10px;padding-left:50px;padding-right:50px;" class="btn btn-danger">';
-							echo '<span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart';
-							echo '</a>';
-							echo '</div>';		
-						}
-						DataProvider::close();
-					?>
-				</div>	
-			</div>
-
-			<div class = "distance">
-				<div class="caption">
-					<h3><b><span class="glyphicon glyphicon-thumbs-up"></span> Most Viewed Products</b></h3>
-				</div>
-				<div class="homeproduct">
-					<?php
-						require_once "DBMySql/DataProvider.php";
-						$sql = "select idProduct, nameProduct, price, imageName from product order by dateCreated desc limit 10";
-						$rs = DataProvider::excuteQuery($sql);
-						while ($row = mysqli_fetch_array($rs)) {
-							echo '<div class ="product">';
-							echo '<a href="#">';
-							echo '<img src="plugins/images/products/'.$row["imageName"].'">';  
-							echo '<h5>'.$row["nameProduct"].'</h5>'; 
-							echo '<strong>'.$row["price"].'₫</strong>'; 
-							echo '</a>';
-							echo '<a href = "#" class="btn btn-info" style = "margin-left:5px;"><b>Mua Hàng</b></a>';
-							echo '<a href = "#" style = "margin-top:10px;padding-left:50px;padding-right:50px;" class="btn btn-danger">';
-							echo '<span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart';
-							echo '</a>';
-							echo '</div>';		
-						}
-						DataProvider::close();
-					?>
-				</div>			
-			</div>	
 		</div>
 	</div>
 	<div>

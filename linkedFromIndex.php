@@ -102,9 +102,24 @@
 					<h3><b><i class='far fa-check-square'></i> New Product</b></h3>
 				</div>
 				<div class="homeproduct">
-					<?php 
+					<?php
+						$offsetCurrent = 0;
+						if (isset($_GET["offset"])) {
+							$offsetCurrent = $_GET["offset"];
+						} 
 						require_once "DBMySql/DataProvider.php";
-						$sql = "select idProduct, nameProduct, price, imageName from product order by dateCreated desc limit 10";
+						$sql = "";
+						$countInDBSQL = "";
+						$choose = "";
+						if (isset($_GET["idCategory"])) {
+							$sql = "select idProduct, nameProduct, price, imageName from product where idCategory = ".$_GET["idCategory"]." order by dateCreated desc limit 15 offset ".$offsetCurrent;	
+							$countInDBSQL = "select count(*) as 'count' from product where idCategory = ".$_GET["idCategory"]; 
+							$choose = "idCategory=".$_GET["idCategory"];
+						} else if (isset($_GET["idProducer"])) {
+							$sql = "select idProduct, nameProduct, price, imageName from product where idProducer = ".$_GET["idProducer"]." order by dateCreated desc limit 15 offset ".$offsetCurrent;
+							$countInDBSQL = "select count(*) as 'count' from product where idProducer = ".$_GET["idProducer"];
+							$choose = "idProducer=".$_GET["idProducer"];
+						}
 						$rs = DataProvider::excuteQuery($sql);
 						while ($row = mysqli_fetch_array($rs)) {
 							echo '<div class ="product">';
@@ -119,64 +134,78 @@
 							echo '</a>';
 							echo '</div>';		
 						}
-						DataProvider::close();					
+						DataProvider::close();
+						
+						$rs = DataProvider::excuteQuery($countInDBSQL);
+						$row = mysqli_fetch_array($rs);
+						$count = $row["count"];
+						DataProvider::close();
+
 					?>		
 				</div>
-			</div>
-			
-			<div class = "distance">
-				<div class="caption">
-					<h3><b><i class='far fa-eye'></i> Most Bought Products</b></h3>
-				</div>
-				<div class="homeproduct">
-					<?php
-						require_once "DBMySql/DataProvider.php";
-						$sql = "select idProduct, nameProduct, price, imageName from product order by quantitySold desc limit 10";
-						$rs = DataProvider::excuteQuery($sql);
-						while ($row = mysqli_fetch_array($rs)) {
-							echo '<div class ="product">';
-							echo '<a href="#">';
-							echo '<img src="plugins/images/products/'.$row["imageName"].'">';  
-							echo '<h5>'.$row["nameProduct"].'</h5>'; 
-							echo '<strong>'.$row["price"].'₫</strong>'; 
-							echo '</a>';
-							echo '<a href = "#" class="btn btn-info" style = "margin-left:5px;"><b>Mua Hàng</b></a>';
-							echo '<a href = "#" style = "margin-top:10px;padding-left:50px;padding-right:50px;" class="btn btn-danger">';
-							echo '<span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart';
-							echo '</a>';
-							echo '</div>';		
-						}
-						DataProvider::close();
-					?>
-				</div>	
-			</div>
+				<nav class="numbering">
+                            <div class="fixPagination">
+                                <a href=<?php echo '"linkedFromIndex.php?'.$choose.'&offset=0"'?>> &laquo;</a>
+                                <a href=<?php if($offsetCurrent <= 0) { echo '"linkedFromIndex.php?'.$choose.'&offset=0"';} else { echo '"linkedFromIndex.php?'.$choose.'&offset='.($offsetCurrent - 15).'"'; } ?>><</a>
+                                <?php
+                                if ($count / 15 < 5) { //Xuất tối đa page khi page nhỏ hơn 5
+                                    for ($i = 0 ;$i < $count/15 ; $i++) {
+                                        $active = "";
+                                        if ($offsetCurrent == ($i*15)) {
+                                            $active = 'class = "active"';
+                                        }
+                                        echo '<a '.$active.' href="linkedFromIndex.php?'.$choose.'&offset='.($i*15).'">'.($i + 1).'</a>';
+                                    }
+                                } else {
+                                    if ($offsetCurrent / 15 < 5) {
+                                        for ($i = 0 ;$i < 5 ; $i++) {
+                                            $active = "";
+                                            if ($offsetCurrent == ($i*15)) {
+                                                $active = 'class = "active"';
+                                            }
+                                            echo '<a '.$active.' href="linkedFromIndex.php?'.$choose.'&offset='.($i*15).'">'.($i + 1).'</a>';
+                                        }
+                                    } else {
+                                        if ($offsetCurrent / 15 < $count/15 - 3) {
+                                            $page = $offsetCurrent / 15;
+                                            for ($i = $page - 2; $i <= $page + 2 ; $i++) {
+                                                $active = "";
+                                                if ($offsetCurrent == ($i*15)) {
+                                                    $active = 'class = "active"';
+                                                }
+                                                echo '<a '.$active.' href="linkedFromIndex.php?'.$choose.'&offset='.($i*15).'">'.($i + 1).'</a>';
+                                            }
+                                        } else {
+                                            
+                                            $page = (int)($count/15) - 2;
+                                            for ($i = $page; $i <= $page + 2 ; $i++) {
+                                                $active = "";
+                                                if ($offsetCurrent == ($i*15)) {
+                                                    $active = 'class = "active"';
+                                                }
+                                                echo '<a '.$active.' href="linkedFromIndex.php?'.$choose.'&offset='.($i*15).'">'.($i + 1).'</a>';
+                                            }
+                                        }
+                                    }
+                                }
+                                
+                            ?>
+                            <a href=<?php 
+										if ($count <= 15) {
+											echo 0;
+										} else {
+											if ($offsetCurrent >= ($count - ($count % 15))) {
+												echo '"linkedFromIndex.php?'.$choose.'&offset='.($count - ($count % 15)).'"';
+											} else {
+												echo  '"linkedFromIndex.php?'.$choose.'&offset='.($offsetCurrent + 15).'"';
+											}
+										}
+								?>>></a>
 
-			<div class = "distance">
-				<div class="caption">
-					<h3><b><span class="glyphicon glyphicon-thumbs-up"></span> Most Viewed Products</b></h3>
-				</div>
-				<div class="homeproduct">
-					<?php
-						require_once "DBMySql/DataProvider.php";
-						$sql = "select idProduct, nameProduct, price, imageName from product order by dateCreated desc limit 10";
-						$rs = DataProvider::excuteQuery($sql);
-						while ($row = mysqli_fetch_array($rs)) {
-							echo '<div class ="product">';
-							echo '<a href="#">';
-							echo '<img src="plugins/images/products/'.$row["imageName"].'">';  
-							echo '<h5>'.$row["nameProduct"].'</h5>'; 
-							echo '<strong>'.$row["price"].'₫</strong>'; 
-							echo '</a>';
-							echo '<a href = "#" class="btn btn-info" style = "margin-left:5px;"><b>Mua Hàng</b></a>';
-							echo '<a href = "#" style = "margin-top:10px;padding-left:50px;padding-right:50px;" class="btn btn-danger">';
-							echo '<span class="glyphicon glyphicon-shopping-cart"></span> Add To Cart';
-							echo '</a>';
-							echo '</div>';		
-						}
-						DataProvider::close();
-					?>
-				</div>			
-			</div>	
+                            <a href=<?php if ($count > 15 - 1 ) { echo '"linkedFromIndex.php?'.$choose.'&offset='.($count - ($count % 15)).'"';} else { echo '"linkedFromIndex.php?'.$choose.'&offset=0"';}?>>&raquo;</a>
+                            </div>
+                        </nav>
+			</div>
 		</div>
 	</div>
 	<div>

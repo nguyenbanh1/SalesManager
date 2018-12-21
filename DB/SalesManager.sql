@@ -63,6 +63,26 @@ create table user
     phone varchar(11),
     addresses nvarchar(100)
 );
--- =========================== Insert DATA ==========================
--- insert data product
+
+select idProduct, nameProduct, price, imageName from product order by quantitySold desc;
+select idProduct, nameProduct, price, imageName from product where idProducer = 1 order by dateCreated desc;
+
+
+-- search
+select p.idProduct, p.nameProduct, p.price, p.imageName
+from product p join category c on p.idCategory = c.idCategory
+join producer pc on p.idProducer = pc.idProducer
+where pc.nameProducer = '22990000' or c.nameCategory = '22990000' or p.nameProduct = '' or p.price = '22990000';
+
+
+
+
+
+
+
+
+
+
+
+
 
