@@ -1,10 +1,10 @@
 ﻿<script>
-    function ClickEye() {
+    function ClickEye(id) {
 
-        if (document.getElementById("detailsOrder").style.display == "") {
-            document.getElementById("detailsOrder").style.display = "none";
+        if (document.getElementById(id).style.display == "") {
+            document.getElementById(id).style.display = "none";
         } else {
-            document.getElementById("detailsOrder").style.display = "";
+            document.getElementById(id).style.display = "";
         }      
     }
 </script>
@@ -48,20 +48,18 @@
                                 require_once("../DBMySql/DataProvider.php");
                                 $sql = "select o.idOrder, o.dateCreated, o.status, o.amount, u.idUser, u.username".
                                 " from orders o, user u ".
-                                "where o.idUser = u.idUser limit 4 offset ".$offsetCurrent;
+                                "where o.idUser = u.idUser order by o.dateCreated desc limit 4 offset ".$offsetCurrent;
                                 $rs = DataProvider::excuteQuery($sql);
                                 $count = 0;
-                                $listIdOrder = array();
                                 while ($row = mysqli_fetch_array($rs)) {
                                     $count++;
-                                    $listIdOrder[$count] = $row["idOrder"];
                                     echo '<tr>';
                                     echo '<td class="text-center">'.$count.'</td>';
                                     echo '<td class = "text-center">'.$row["username"].'</td>';
                                     echo '<td class = "text-center">'.$row["dateCreated"].'</td>';
                                     echo '<td class = "text-center">'.$row["amount"].'</td>';
                                     echo '<td class="text-center">';
-                                    echo    '<a href="#"<i class="fa fa-eye" onclick = "ClickEye()"></a>';
+                                    echo    '<div class="fa fa-eye" onclick = "ClickEye('.$row["idOrder"].')"></div>';
                                     echo '</td>';
                                     $status = $row["status"];
                                     if (isset($_GET["status"])) {
@@ -80,68 +78,70 @@
                                     echo    '</ul>';
                                     echo '</div>';
                                     echo '</td>';
+                                    echo '</tr>';
+                                    echo '<tr style = "display:none;" id = "'.$row["idOrder"].'">';
+                                       require "OrderDetail.php";
+                                    echo '</tr>';
                                 }
                                 DataProvider::close();
                             ?>
-                            <tr style = "display:none;"id = "detailsOrder">
-                                <td colspan="7" class="padding-fix text-center">
-                                    <div class="panel-body">
-                                        <div class="items">
-                                            <div>
-                                                <table class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>No.</th>
-                                                            <th>Product</th>
-                                                            <th>Unit Price</th>
-                                                            <th>Quantity</th>
-                                                            <th>Total Price</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <?php
-                                                            
-                                                            foreach($listIdOrder as $key => $value) {
-                                                                $sql = "select d.idProduct,p.nameProduct,d.quantity,d.price,d.totalCost from detailorder d,product p ".
-                                                                "where d.idOrder = ".$value." and p.idProduct = d.idProduct";
-                                                                $rs = DataProvider::excuteQuery($sql);
-                                                                $count = 0;
-                                                                while ($row = mysqli_fetch_array($rs)) {
-                                                                    $count++;
-                                                                    echo '<tr>';
-                                                                    echo '<td>'.$count.'</td>';
-                                                                    echo '<td class = "text-center">'.$row["nameProduct"].'</td>';
-                                                                    echo '<td class = "text-center">'.$row["price"].'</td>';
-                                                                    echo '<td class = "text-center">'.$row["quantity"].'</td>';
-                                                                    echo '<td class = "text-center">'.$row["totalCost"].'</td>';
-                                                                    echo '</tr>';
-                                                                }
-                                                                DataProvider::close();
-                                                            }
-                                                        ?>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
+                    <?php
+                        $sql = "select count(*) as 'count' from orders";
+                        $rs = DataProvider::excuteQuery($sql);
+                        $row = mysqli_fetch_array($rs);
+                        $count = $row["count"];
+                        DataProvider::close();
+                    ?>
 
                     <nav class="numbering">
                         <div class="fixPagination">
                             <a href="NewOrders.php?offset=0">&laquo;</a>
                             <a href="NewOrders.php?offset=<?php if($offsetCurrent <= 0) { echo 0;} else { echo ($offsetCurrent - 4); } ?>"><</a>
                             <?php
-                                
-                                for ($i = 0 ;$i < $count/4 ; $i++) {
-                                    $active = "";
-                                    if ($offsetCurrent == ($i*4)) {
-                                        $active = 'class = "active"';
+                                if ($count / 4 < 5) {
+                                    for ($i = 0 ;$i < $count/4 ; $i++) {
+                                        $active = "";
+                                        if ($offsetCurrent == ($i*4)) {
+                                            $active = 'class = "active"';
+                                        }
+                                        echo '<a '.$active.' href="NewOrders.php?offset='.($i*4).'">'.($i + 1).'</a>';
                                     }
-                                    echo '<a '.$active.' href="NewOrders.php?offset='.($i*4).'">'.($i + 1).'</a>';
                                 }
+                                else {
+                                    if ($offsetCurrent / 4 < 5) {
+                                        for ($i = 0 ;$i < 5 ; $i++) {
+                                            $active = "";
+                                            if ($offsetCurrent == ($i*4)) {
+                                                $active = 'class = "active"';
+                                            }
+                                            echo '<a '.$active.' href="NewOrders.php?offset='.($i*4).'">'.($i + 1).'</a>';
+                                        }
+                                    } else {
+                                        if ($offsetCurrent / 4 < $count/4 - 3) {
+                                            $page = $offsetCurrent / 4;
+                                            for ($i = $page - 2; $i <= $page + 2 ; $i++) {
+                                                $active = "";
+                                                if ($offsetCurrent == ($i*4)) {
+                                                    $active = 'class = "active"';
+                                                }
+                                                echo '<a '.$active.' href="NewOrders.php?offset='.($i*4).'">'.($i + 1).'</a>';
+                                            }
+                                        } else {
+                                            
+                                            $page = (int)($count/4) - 2;
+                                            for ($i = $page; $i <= $page + 2 ; $i++) {
+                                                $active = "";
+                                                if ($offsetCurrent == ($i*4)) {
+                                                    $active = 'class = "active"';
+                                                }
+                                                echo '<a '.$active.' href="NewOrders.php?offset='.($i*4).'">'.($i + 1).'</a>';
+                                            }
+                                        }
+                                    }
+                                }
+                                
                             ?>
                             <a href="NewOrders.php?offset=<?php 
                                                                 if ($count <= 4) {

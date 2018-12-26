@@ -12,7 +12,7 @@
         <div class="row profile">
             <div class="col-md-3 col-sm-3">
                 <?php 
-                    $imageName = "kakashi.jpg";  
+                    // $imageName = "kakashi.jpg";  
                     require "ProfileSidebar.php";
                 ?>
             </div>

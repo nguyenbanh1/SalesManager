@@ -20,7 +20,7 @@
                 <a href="NewProducer.php" class="waves-effect"><i class="glyphicon glyphicon-user fa-fw" aria-hidden="true"></i>Producer</a>
             </li>
             <li>
-                <a href="Default.php" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Website</a>
+                <a href="../index.php" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>Website</a>
             </li>
             <li>
             <a href="Default.php" class="waves-effect"><i class="fa fa-globe fa-fw" aria-hidden="true"></i>LogOut</a>

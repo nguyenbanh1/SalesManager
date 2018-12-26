@@ -1,5 +1,4 @@
 <?php 
-    $image = null;
     if (isset($_FILES["FileUploadAvatar"]) && $_FILES["FileUploadAvatar"]["tmp_name"] != null) {
 
         $target_dir = "../imagesUser/";
@@ -20,7 +19,6 @@
         }
         // Check if file already exists
         if (file_exists($target_file)) {
-            echo "Sorry, file already exists.";
             $uploadOk = 0;
         }
         // Check file size
@@ -36,9 +34,6 @@
         }
         // Check if $uploadOk is set to 0 by an error
         if ($uploadOk == 0) {
-            echo "Sorry, your file was not uploaded.";
-        // if everything is ok, try to upload file
-        
         } else {
             if (move_uploaded_file($_FILES["FileUploadAvatar"]["tmp_name"], $target_file)) {
                 echo "The file ". basename( $_FILES["FileUploadAvatar"]["name"]). " has been uploaded.";
@@ -46,6 +41,12 @@
                 echo "Sorry, there was an error uploading your file.";
             }
         }
+        if (isset($_POST["idUser"])) {
+            $sql = "update user set imageName = '".$image."' where idUser=".$_POST["idUser"];
+            require "../../DBMySql/DataProvider.php";
+            DataProvider::excuteQuery($sql);
+            DataProvider::close();
+        }
     }
-    echo $image;
+    header("Location:../masterPersonal.php?idUser=".$_POST["idUser"]);
 ?>

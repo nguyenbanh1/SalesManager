@@ -38,7 +38,7 @@
 								echo '</li>';
 								if (isset($_SESSION["user"]["type"]) && strtolower($_SESSION["user"]["type"]) == "admin") {
 									echo '<li>';
-									echo '<a href = "#">Admin</a>';
+									echo '<a href = "Admin">Admin</a>';
 									echo '</li>';
 								}
 							} else {
@@ -54,65 +54,47 @@
 			<div id="banner">
 				<h1 style="display:inline;">SALE MANAGER</h1>
 				<div style="display:inline;margin-left:120px;">
-					<form action="#" style = "display:inline">
+					<form action="../search.php" style = "display:inline">
 						<input type="test"  placeholder="Vui lòng nhập sản phẩm...." >
 						<button type="submit"><i class="fa fa-search"></i></button>
 					</form>
 				</div>				
 			</div>
 			<div id="menu">
-				<div style = "display:inline-block" class = "menu-frame">
-					<a href = "../index.php"><span class="glyphicon glyphicon-home"></span>Trang Chủ</a>
-				</div>
-				<div class="dropdown menu-frame">
-    				<a href = "#" class="dropdown-toggle" data-toggle="dropdown">Điện Thoại
-    				<span class="caret"></span></a>
-    				<ul class="dropdown-menu">
-						<li><a href="#">Xiaomi</a></li>
-						<li><a href="#">Iphone</a></li>
-						<li><a href="#">SAMSUNG</a></li>
-    				</ul>
- 				</div>
-				 <div class="dropdown menu-frame">
-    				<a href = "#" class="dropdown-toggle" data-toggle="dropdown">Linh Kiện Điện Thoại
-    				<span class="caret"></span></a>
-    				<ul class="dropdown-menu">
-						<li><a href="#">aaaaa</a></li>
-						<li><a href="#">bbbbb</a></li>
-						<li><a href="#">ccccc</a></li>
-    				</ul>
- 				</div>
-				<div class="dropdown menu-frame">
-    				<a href = "#" class="dropdown-toggle" data-toggle="dropdown">Lap Top
-    				<span class="caret"></span></a>
-    				<ul class="dropdown-menu">
-						<li><a href="#">aaaaaa</a></li>
-						<li><a href="#">bbbbbb</a></li>
-						<li><a href="#">cccccc</a></li>
-    				</ul>
-				 </div>
-				 <div class="dropdown menu-frame">
-    				<a href = "#" class="dropdown-toggle" data-toggle="dropdown">Máy Tính Bảng
-    				<span class="caret"></span></a>
-    				<ul class="dropdown-menu">
-						<li><a href="#">aaaaaaaaaaaaaaaa></li>
-						<li><a href="#">bbbbbbbbbbbbbbbb</a></li>
-						<li><a href="#">cccccccccccccccc</a></li>
-    				</ul>
-				 </div>
-				 <div class="dropdown menu-frame">
-    				<a href = "#" class="dropdown-toggle" data-toggle="dropdown">Nhà Sản Xuất
-    				<span class="caret"></span></a>
-    				<ul class="dropdown-menu">
-						<li><a href="#">aaaaaaaaaaaaaaaa></li>
-						<li><a href="#">bbbbbbbbbbbbbbbb</a></li>
-						<li><a href="#">cccccccccccccccc</a></li>
-    				</ul>
-				 </div>
+			<div style = "display:inline-block" class = "menu-frame">
+				<a href = "../index.php"><span class="glyphicon glyphicon-home"></span>Trang Chủ</a>
+			</div>
+			<?php 
+				require_once "../DBMySql/DataProvider.php";
+				$sql = "select * from category";
+				$rs = DataProvider::excuteQuery($sql);
+				while ($row = mysqli_fetch_array($rs)) {
+					$idCategory = $row["idCategory"];
+					echo '<div class="dropdown menu-frame">';
+					echo '<a href="../linkedFromIndex.php?idCategory='.$idCategory.'">'.$row["nameCategory"].'</a>';
+					echo '</div>';
+				}
+				DataProvider::close();
+			?>
+			<div class="dropdown menu-frame">
+				<a href = "#" class="dropdown-toggle" data-toggle="dropdown">Producer
+				<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<?php
+						$sql = "select * from producer";
+						$rs = DataProvider::excuteQuery($sql);
+						while ($row = mysqli_fetch_array($rs)) {
+							$idProducer = $row["idProducer"];
+							echo '<li><a href="../linkedFromIndex.php?idProducer='.$idProducer.'">'.$row["nameProducer"].'</a></li>';
+						}
+						DataProvider::close();
+					?>
+				</ul>
+			</div>
 			</div>
         </div><br><br>
         <div class="col-3 rounded border shadow p-3 mb-5 bg-white " id="col-Login" >
-            <p class = "title"><strong>CREATE ACCOUNT</strong></p>
+            <p class = "title" style = "text-align:center;font-size:20px;"><strong>CREATE ACCOUNT</strong></p>
             <form class="login-form"  method="POST" action = "LoginHandler.php">
                 <div class="form-group" id="errorLogin" >
 				</div>
@@ -153,34 +135,32 @@
 				</div>
             </form>
         </div>
-    </div>
-    
-	<br><br>
-	<div id="footer">
-		<div class="w3_footer_grids">
-			<div class="col-md-3 w3_footer_grid">
-                <h3>Information</h3>
-               <ul class="address">
-                    <li><i class="glyphicon glyphicon-user" aria-hidden="true"></i>Lê Nguyễn Quang Đại Lộc</li>
-                    <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
-                    <li><i class="glyphicon glyphicon-user" aria-hidden="true"></i>Tăng Khánh Nguyên</li>
-                    <li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
-                </ul><s></s>
-            </div>
-            <div class="col-md-3 w3_footer_grid">
-                <h3>Contact</h3>
-                <ul class="address">
-                    <li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>227 Nguyễn Văn Cừ Quận 3 TP.HCM</li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">lnqdloc@gmail.com</a></li>
-                    <li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">Tangkhannguyen@gmail.com</a></li>
-                </ul>
-            </div>
-		</div><br>
 	</div>
 	<div>
-		<p>
-			Công Ty Trách Nhiệm Hữu Hạn 2 Thành Viên | Design By <a href="https://www.facebook.com/profile.php?id=100003983416679">Hiệp Sĩ Mù</a>
-		</p>
+		<div id="footer">
+			<div class="w3_footer_grids">
+				<div class="col-md-3 w3_footer_grid">
+					<h3>Information</h3>
+				<ul class="address">
+						<li><i class="glyphicon glyphicon-user" aria-hidden="true"></i>Lê Nguyễn Quang Đại Lộc</li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+						<li><i class="glyphicon glyphicon-user" aria-hidden="true"></i>Tăng Khánh Nguyên</li>
+						<li><i class="glyphicon glyphicon-earphone" aria-hidden="true"></i>+1234 567 567</li>
+					</ul><s></s>
+				</div>
+				<div class="col-md-3 w3_footer_grid">
+					<h3>Contact</h3>
+					<ul class="address">
+						<li><i class="glyphicon glyphicon-map-marker" aria-hidden="true"></i>227 Nguyễn Văn Cừ Quận 3 TP.HCM</li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">lnqdloc@gmail.com</a></li>
+						<li><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">Tangkhannguyen@gmail.com</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div style = "background: #2b2a2a;color: #afafaf;text-align:center;margin-top:-20px;">
+				Công Ty Trách Nhiệm Hữu Hạn 2 Thành Viên | Design By <a href="https://www.facebook.com/profile.php?id=100003983416679">Hiệp Sĩ Mù</a>
+		</div>
     </div>	
 </body>
 </html>

@@ -10,13 +10,9 @@ body{
 
 }
 #container{
-	height: 250px;
 	width: 100%;
-	position: relative;
-
 }
 #content{
-	height: 1200px;
 	width: 100%	;
 	background: #f3f3f3;
 }
@@ -90,6 +86,7 @@ body{
 	min-height: 330px;
 	width: auto;
 	padding:30px;
+	margin-top: 100px;
 }
 .w3_footer_grid{
 	margin-left: 250px;
@@ -124,14 +121,8 @@ a{
 	color:#fe9126;
 }
 /*HomeProduct*/
-.homeproduct li .price{
-	display:block;
-	overflow:hidden;
-	padding:5px 10px 10px 10px;
-}
 .homeproduct{
 	clear:both;
-	display:block;
 	background:#fff;
 	display:flex;
 	flex-flow:row wrap;
@@ -140,16 +131,10 @@ a{
 	border-top:1px solid #eee;
 	margin-bottom:auto;
 }
-.homeproduct li a{
-	display:block;
-	overflow:hidden;
-	background:#fff;
-	padding:10px ;
-	text-decoration: none; 	
-}
 .caption{
 	min-height: 60px;
 	background: #f3f3f3;
+	text-decoration: none;
 }
 .caption h3{
 	padding-top: 10px;
@@ -159,40 +144,22 @@ a{
 	margin-left: 10px;
 	color: #ffcc00;
 }
-.homeproduct button{
-	font-family: arian;
-	color: black;
-}
-.homeproduct li button:hover{
-	color: white;
-}
-.homeproduct ul{		
+.homeproduct {
 	width: 100%;
 }
-.price strong{
-	color: red;
+.product {
+	width: 20%;
+	text-align: center;
+	margin-top: 40px;
 }
-.homeproduct ul li a:hover h3{
-	color:#288ad6;
-	text-decoration: none;
-}
-.buy button{
-	color: black;
-	background: #ccc
-}
-.homeproduct li img{
+.product img{
 	display:block;
-	width:180px;	
-	height:180px;
-	margin:15px auto;
+	width:300x;	
+	height:230px;
+	margin:10px;
 }
-.homeproduct li{
-	float:left;
-	position:relative;
-	width:19.917%;
-	overflow:hidden;
-	border-right:1px solid #eee;
-	border-bottom:1px solid #eee;
+.product a{
+	text-decoration: none;
 }
 .Cty p a:hover{
 	color: orange;
@@ -203,16 +170,9 @@ a{
 .row{
  margin-top: 5%;
 }
-
 .w3_footer_grids a:hover{
 	color:#fe9126;
 	text-decoration: none;
-}
-p{
-	color: #afafaf;
-	background:#2b2a2a;
-	text-align: center;
-
 }
 label{
     font-family: "Homer Simpson", cursive;
@@ -230,4 +190,16 @@ label{
 .title{
 	padding:10px;
 
+}
+.distance {
+	margin-top: 50px;
+<<<<<<< HEAD
+}
+
+/* paging */
+.paging-top{
+	margin:30px;
+	margin-right:80px
+=======
+>>>>>>> dd706054469a0761f4fa6f6f905460eda296502c
 }

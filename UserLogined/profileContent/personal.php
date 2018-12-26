@@ -1,4 +1,4 @@
-<form>
+<form action = "PageHandler/UpdateProfileHandler.php" method = "post">
     <fieldset>
         <legend>Profile</legend>
 
@@ -6,7 +6,7 @@
             <label class="col-md-2" class = "padding-input">Name</label>
             <div class="col-md-5">
                 <input type = "hidden" name = "idUser" value = <?=$idUser?>>
-                <input type = "text" Class="form-control form-control-line" name = "username" value = "<?=$nameUser?>">
+                <input type = "text" Class="form-control form-control-line" name = "nameUser" value = "<?=$nameUser?>">
             </div>
         </div>
         <div class="form-group clearfix">
@@ -27,12 +27,6 @@
             <label class="col-md-2 control-label" for="textinput" class = "padding-input">DateOfBirth</label>
             <div class="col-md-5">
                 <input Class="form-control input-md" type = "date" name= "dateofbirth" value = "<?=$dateOfBirth?>">
-            </div>
-        </div>
-        <div class="form-group clearfix">
-            <label class="col-md-2 control-label" for="textinput"class = "padding-input">Gender</label>
-            <div class="col-md-5">
-                <input Class="form-control input-md" type = "text" name= "gender" value = "<?=$gender?>">
             </div>
         </div>
         <div class="form-group clearfix">
