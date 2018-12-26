@@ -73,12 +73,3 @@ select p.idProduct, p.nameProduct, p.price, p.imageName
 from product p join category c on p.idCategory = c.idCategory
 join producer pc on p.idProducer = pc.idProduscer
 where pc.nameProducer = '22990000' or c.nameCategory = '22990000' or p.nameProduct = '' or p.price = '22990000';
-
-
-
-
-
-
-
-
-

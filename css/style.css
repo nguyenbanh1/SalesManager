@@ -193,10 +193,13 @@ label{
 }
 .distance {
 	margin-top: 50px;
+<<<<<<< HEAD
 }
 
 /* paging */
 .paging-top{
 	margin:30px;
 	margin-right:80px
+=======
+>>>>>>> dd706054469a0761f4fa6f6f905460eda296502c
 }
