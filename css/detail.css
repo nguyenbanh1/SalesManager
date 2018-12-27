@@ -1,0 +1,38 @@
+
+/*****************globals*************/
+body{
+	font-family: sans-serif;
+	font-size: 14px;
+	width: 100%;
+	margin: 0px;
+
+}
+.container{
+	padding-top: 10px;
+}
+.card{
+	height: 550px;
+	background: #CCC;
+	width: 1000px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 20px;
+}
+.preview{
+	width: 500px;
+	min-height: 600px;
+	float: left;
+}
+.detail-right{
+	float: left;
+	width: 500px;		
+	min-height: 600px;
+}
+.menu_below{
+	margin-top: -20px;
+}
+.show_product{
+	height: 100px;
+	width: 100%;
+	border: #ccc solid 2px;
+}

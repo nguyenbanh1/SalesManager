@@ -29,6 +29,7 @@ body{
 }
 .menu_top ul li{
 	list-style: none;
+
 	margin-right: 50px;
 	text-align: right;
 	float: right;
@@ -140,6 +141,7 @@ body{
 #footer{
 	background: #2b2a2a;
 	min-height: 400px;
+
 	width: auto;
 	padding: 5em 0 2em;
 
@@ -197,7 +199,7 @@ a{
 	display:block;
 	overflow:hidden;
 	background:#fff;
-	padding:10px ;
+	padding:0px ;
 	text-decoration: none; 	
 }
 .caption{
@@ -211,6 +213,7 @@ a{
 	line-height: 60px;
 	margin-left: 10px;
 	color: #ffcc00;
+	background: #f7f7f7;
 }
 .homeproduct button{
 	font-family: arian;
@@ -225,15 +228,21 @@ a{
 .price strong{
 	color: red;
 }
+.homeproduct ul li a h3{
+	color: #CCC;
+	background: white;
+}
 .homeproduct ul li a:hover h3{
 	color:#288ad6;
 	text-decoration: none;
+
 }
 .buy button{
 	color: black;
 	background: #ccc
 }
 .homeproduct ul li a button{
+	margin-top: 5px;
 }
 .homeproduct li img{
 	display:block;
@@ -254,7 +263,7 @@ a{
 	text-decoration: none;
 }
 .left-filter-panel a{
-	
+
 }
 /*-------Login*/
 
@@ -266,12 +275,7 @@ a{
 	color:#fe9126;
 	text-decoration: none;
 }
-p{
-	color: #afafaf;
-	background:#2b2a2a;
-	text-align: center;
 
-}
 label{
     font-family: "Homer Simpson", cursive;
     font-size:15px;
